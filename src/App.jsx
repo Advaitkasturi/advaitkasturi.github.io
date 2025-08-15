@@ -7,11 +7,11 @@ import Experience from "./assets/pages/experience";
 import Projects from "./assets/pages/projects";
 import IEEE from "./assets/pages/ieee";
 import GDG from "./assets/pages/gdg";
-import Hack from "./assets/pages/hack"; // ✅ Import your Hack page
+import Hack from "./assets/pages/hack";
 
 export default function App() {
   return (
-    <Router basename="/"> {/* <-- Keep this '/' for username.github.io */}
+    <Router basename="/"> {/* This is correct for GitHub Pages */}
       <div className="min-h-screen flex flex-col bg-black text-white">
         <Navbar />
         <main className="flex-grow p-6">
@@ -20,7 +20,7 @@ export default function App() {
               path="/"
               element={
                 <>
-                  <Home />
+                  <Home />          {/* Includes AboutMe (with Download CV) */}
                   <Experience />
                   <Skills />
                   <Projects />
@@ -29,7 +29,7 @@ export default function App() {
             />
             <Route path="/ieee" element={<IEEE />} />
             <Route path="/gdg" element={<GDG />} />
-            <Route path="/hack" element={<Hack />} /> {/* ✅ New Route */}
+            <Route path="/hack" element={<Hack />} />
           </Routes>
         </main>
         <ContactFooter />

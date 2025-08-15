@@ -4,7 +4,6 @@ import { Github } from "lucide-react";
 import { useSwipeable } from "react-swipeable";
 
 export default function HackSection({ title, description, images, githubLink }) {
-  // Shared state for both carousels
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -14,7 +13,6 @@ export default function HackSection({ title, description, images, githubLink }) 
   const nextSlide = () => setIndex((prev) => (prev + 1) % images.length);
   const prevSlide = () => setIndex((prev) => (prev - 1 + images.length) % images.length);
 
-  // Swipe handlers for mobile
   const handlers = useSwipeable({
     onSwipedLeft: nextSlide,
     onSwipedRight: prevSlide,
@@ -34,8 +32,8 @@ export default function HackSection({ title, description, images, githubLink }) 
         {description}
       </p>
 
-      {/* Desktop Carousel (hidden on mobile) */}
-      <div className="relative w-full max-w-3xl aspect-[4/3] overflow-hidden rounded-lg mb-6 shadow-lg border border-orange-400/20 bg-black/30 hidden sm:block">
+      {/* Desktop Carousel */}
+      <div className="relative w-full max-w-3xl aspect-[4/3] overflow-hidden rounded-lg mb-3 shadow-lg border border-orange-400/20 bg-black/30 hidden sm:block">
         <AnimatePresence initial={false} mode="wait">
           <motion.img
             key={images[index]}
@@ -49,23 +47,7 @@ export default function HackSection({ title, description, images, githubLink }) 
           />
         </AnimatePresence>
 
-        {/* Navigation Buttons */}
-        <button
-          onClick={prevSlide}
-          aria-label="Previous slide"
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 text-white p-2 sm:p-2.5 rounded-full transition z-10 backdrop-blur-md"
-        >
-          ❮
-        </button>
-        <button
-          onClick={nextSlide}
-          aria-label="Next slide"
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 text-white p-2 sm:p-2.5 rounded-full transition z-10 backdrop-blur-md"
-        >
-          ❯
-        </button>
-
-        {/* Slide Indicators (Dots) */}
+        {/* Slide Indicators */}
         <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
           {images.map((_, i) => (
             <div
@@ -78,10 +60,28 @@ export default function HackSection({ title, description, images, githubLink }) 
         </div>
       </div>
 
-      {/* Mobile Carousel (hidden on desktop) */}
+      {/* Desktop Arrows Below */}
+      <div className="hidden sm:flex justify-between w-full max-w-3xl mb-6 px-4">
+        <button
+          onClick={prevSlide}
+          aria-label="Previous slide"
+          className="bg-black/40 hover:bg-black/70 text-white p-4 rounded-full shadow-lg transition transform hover:scale-110 backdrop-blur-md"
+        >
+          ❮
+        </button>
+        <button
+          onClick={nextSlide}
+          aria-label="Next slide"
+          className="bg-black/40 hover:bg-black/70 text-white p-4 rounded-full shadow-lg transition transform hover:scale-110 backdrop-blur-md"
+        >
+          ❯
+        </button>
+      </div>
+
+      {/* Mobile Carousel */}
       <div
         {...handlers}
-        className="relative w-full max-w-md aspect-[4/3] rounded-lg mb-6 shadow-lg border border-orange-400/20 bg-black/30 block sm:hidden select-none"
+        className="relative w-full max-w-md aspect-[4/3] rounded-lg mb-3 shadow-lg border border-orange-400/20 bg-black/30 block sm:hidden select-none"
       >
         <AnimatePresence initial={false} mode="wait">
           <motion.img
@@ -97,22 +97,6 @@ export default function HackSection({ title, description, images, githubLink }) 
           />
         </AnimatePresence>
 
-        {/* Navigation Buttons */}
-        <button
-          onClick={prevSlide}
-          aria-label="Previous slide"
-          className="absolute left-1 top-1/2 -translate-y-1/2 bg-gradient-to-tr from-orange-500 to-pink-500 hover:brightness-110 text-white p-3 rounded-full shadow-lg z-20"
-        >
-          ❮
-        </button>
-        <button
-          onClick={nextSlide}
-          aria-label="Next slide"
-          className="absolute right-1 top-1/2 -translate-y-1/2 bg-gradient-to-tr from-orange-500 to-pink-500 hover:brightness-110 text-white p-3 rounded-full shadow-lg z-20"
-        >
-          ❯
-        </button>
-
         {/* Slide Indicators */}
         <div className="flex space-x-3 absolute bottom-3 left-1/2 transform -translate-x-1/2 z-20">
           {images.map((_, i) => (
@@ -126,10 +110,24 @@ export default function HackSection({ title, description, images, githubLink }) 
             />
           ))}
         </div>
+      </div>
 
-        {/* Swipe Hint */}
-        <p className="text-xs text-gray-400 mt-2 italic absolute bottom-10 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none">
-        </p>
+      {/* Mobile Arrows Below */}
+      <div className="flex sm:hidden justify-between w-full max-w-md mb-6 px-4">
+        <button
+          onClick={prevSlide}
+          aria-label="Previous slide"
+          className="bg-gradient-to-tr from-orange-500 to-pink-500 hover:brightness-110 text-white p-3 rounded-full shadow-lg transform hover:scale-110"
+        >
+          ❮
+        </button>
+        <button
+          onClick={nextSlide}
+          aria-label="Next slide"
+          className="bg-gradient-to-tr from-orange-500 to-pink-500 hover:brightness-110 text-white p-3 rounded-full shadow-lg transform hover:scale-110"
+        >
+          ❯
+        </button>
       </div>
 
       {/* GitHub Button */}
@@ -138,7 +136,7 @@ export default function HackSection({ title, description, images, githubLink }) 
           href={githubLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-5 py-2.5 rounded-md text-sm sm:text-base font-medium shadow-md transition-all"
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-5 py-2.5 rounded-md text-sm sm:text-base font-medium shadow-md transition-all hover:scale-105"
         >
           <Github size={18} />
           View on GitHub

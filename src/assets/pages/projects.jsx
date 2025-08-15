@@ -63,7 +63,7 @@ export default function Projects() {
             </div>
 
             <p className="mt-3 text-gray-400 text-[11px] text-center italic">
-              Swipe or tap arrows to navigate
+             
             </p>
           </motion.div>
         </AnimatePresence>

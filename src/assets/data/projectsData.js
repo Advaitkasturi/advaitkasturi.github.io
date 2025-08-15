@@ -1,7 +1,7 @@
 // Example: src/assets/data/projectsData.js
 export default [
   {
-    name: "IEEE-GNI (College Official Website)",
+    name: "IEEE-GNI (College`s Official Website)",
     description: "A responsive College Student Club Website built with React and Tailwind CSS.",
     liveLink: "https://ieeegnitc.org/",
     repoLink: ""

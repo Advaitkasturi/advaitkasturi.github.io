@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github } from "lucide-react";
+import { useSwipeable } from "react-swipeable";
 
 export default function HackSection({ title, description, images, githubLink }) {
+  // Shared state for both carousels
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -12,8 +14,16 @@ export default function HackSection({ title, description, images, githubLink }) 
   const nextSlide = () => setIndex((prev) => (prev + 1) % images.length);
   const prevSlide = () => setIndex((prev) => (prev - 1 + images.length) % images.length);
 
+  // Swipe handlers for mobile
+  const handlers = useSwipeable({
+    onSwipedLeft: nextSlide,
+    onSwipedRight: prevSlide,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   return (
-    <section className="flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-12">
+    <section className="px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col items-center">
       {/* Title */}
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-pink-500 via-violet-500 to-orange-400 text-transparent bg-clip-text mb-4">
         {title}
@@ -24,8 +34,8 @@ export default function HackSection({ title, description, images, githubLink }) 
         {description}
       </p>
 
-      {/* Carousel Container */}
-      <div className="relative w-full max-w-3xl aspect-[4/3] overflow-hidden rounded-lg mb-6 shadow-lg border border-orange-400/20 bg-black/30">
+      {/* Desktop Carousel (hidden on mobile) */}
+      <div className="relative w-full max-w-3xl aspect-[4/3] overflow-hidden rounded-lg mb-6 shadow-lg border border-orange-400/20 bg-black/30 hidden sm:block">
         <AnimatePresence initial={false} mode="wait">
           <motion.img
             key={images[index]}
@@ -68,6 +78,60 @@ export default function HackSection({ title, description, images, githubLink }) 
         </div>
       </div>
 
+      {/* Mobile Carousel (hidden on desktop) */}
+      <div
+        {...handlers}
+        className="relative w-full max-w-md aspect-[4/3] rounded-lg mb-6 shadow-lg border border-orange-400/20 bg-black/30 block sm:hidden select-none"
+      >
+        <AnimatePresence initial={false} mode="wait">
+          <motion.img
+            key={images[index]}
+            src={images[index]}
+            alt={`Slide ${index + 1}`}
+            initial={{ opacity: 0, x: 50, scale: 0.9 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: -50, scale: 0.9 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-full max-h-full object-contain rounded-lg mx-auto"
+            draggable={false}
+          />
+        </AnimatePresence>
+
+        {/* Navigation Buttons */}
+        <button
+          onClick={prevSlide}
+          aria-label="Previous slide"
+          className="absolute left-1 top-1/2 -translate-y-1/2 bg-gradient-to-tr from-orange-500 to-pink-500 hover:brightness-110 text-white p-3 rounded-full shadow-lg z-20"
+        >
+          ❮
+        </button>
+        <button
+          onClick={nextSlide}
+          aria-label="Next slide"
+          className="absolute right-1 top-1/2 -translate-y-1/2 bg-gradient-to-tr from-orange-500 to-pink-500 hover:brightness-110 text-white p-3 rounded-full shadow-lg z-20"
+        >
+          ❯
+        </button>
+
+        {/* Slide Indicators */}
+        <div className="flex space-x-3 absolute bottom-3 left-1/2 transform -translate-x-1/2 z-20">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`w-3 h-3 rounded-full transition-transform duration-300 ${
+                i === index ? "bg-orange-400 scale-125" : "bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Swipe Hint */}
+        <p className="text-xs text-gray-400 mt-2 italic absolute bottom-10 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none">
+        </p>
+      </div>
+
       {/* GitHub Button */}
       {githubLink && (
         <a
@@ -80,11 +144,6 @@ export default function HackSection({ title, description, images, githubLink }) 
           View on GitHub
         </a>
       )}
-
-      {/* Mobile Swipe Hint (Optional) */}
-      <p className="text-xs text-gray-400 mt-3 sm:hidden italic">
-        Swipe left/right to view more
-      </p>
     </section>
   );
 }

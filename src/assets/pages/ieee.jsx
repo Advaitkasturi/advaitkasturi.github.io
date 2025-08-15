@@ -19,11 +19,13 @@ export default function IEEE() {
 
   return (
     <div className="min-h-screen bg-black text-white px-4 py-8 mt-20">
-      <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-400 via-violet-500 to-pink-400 bg-clip-text text-transparent">
-    </h1>
-      <p className="mt-4 text-lg text-center text-gray-300">
+ <h1 className="text-4xl font-bold text-center text-white">
+  {/* Optionally add a heading here */}
+</h1>
+<p className="mt-4 text-lg text-center text-white-400">
 
-      </p>
+</p>
+
 
       {/* Carousel Section */}
       <div className="relative mt-12 mx-auto max-w-3xl overflow-hidden rounded-xl shadow-xl border border-pink-500">

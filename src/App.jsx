@@ -11,8 +11,8 @@ import Hack from "./assets/pages/hack"; // ✅ Import your Hack page
 
 export default function App() {
   return (
-    <Router basename="/"> {/* <-- Set this to '/' if your repo is username.github.io */}
-      <div className="min-h-screen flex flex-col bg-white text-black dark:bg-black dark:text-white">
+    <Router basename="/"> {/* <-- Keep this '/' for username.github.io */}
+      <div className="min-h-screen flex flex-col bg-black text-white">
         <Navbar />
         <main className="flex-grow p-6">
           <Routes>

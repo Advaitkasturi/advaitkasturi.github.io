@@ -18,17 +18,17 @@ export default function IEEE() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white px-4 py-8 mt-20">
- <h1 className="text-4xl font-bold text-center text-white">
-  {/* Optionally add a heading here */}
-</h1>
-<p className="mt-4 text-lg text-center text-white-400">
-
-</p>
-
+    <div className="min-h-screen bg-black text-white flex flex-col justify-center items-center px-4">
+      {/* Optional Heading */}
+      <h1 className="text-4xl font-bold text-center text-white">
+        IEEE Gallery !
+      </h1>
+      <p className="mt-2 text-lg text-center text-gray-300">
+       
+      </p>
 
       {/* Carousel Section */}
-      <div className="relative mt-12 mx-auto max-w-3xl overflow-hidden rounded-xl shadow-xl border border-pink-500">
+      <div className="relative mt-6 w-full max-w-3xl overflow-hidden rounded-xl shadow-xl">
         <AnimatePresence initial={false} mode="wait">
           <motion.img
             key={images[index]}
@@ -38,7 +38,7 @@ export default function IEEE() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.5 }}
-            className="w-full h-[300px] object-cover sm:h-[400px]"
+            className="w-full h-[300px] sm:h-[400px] object-cover"
           />
         </AnimatePresence>
 

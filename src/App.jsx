@@ -11,7 +11,7 @@ import Hack from "./assets/pages/hack";
 
 export default function App() {
   return (
-    <Router basename="/"> {/* This is correct for GitHub Pages */}
+    <Router basename="/"> {/* Correct for GitHub Pages */}
       <div className="min-h-screen flex flex-col bg-black text-white">
         <Navbar />
         <main className="flex-grow p-6">
@@ -24,6 +24,7 @@ export default function App() {
                   <Experience />
                   <Skills />
                   <Projects />
+                  <ContactFooter /> {/* ✅ Only shows on main page */}
                 </>
               }
             />
@@ -32,7 +33,6 @@ export default function App() {
             <Route path="/hack" element={<Hack />} />
           </Routes>
         </main>
-        <ContactFooter />
       </div>
     </Router>
   );

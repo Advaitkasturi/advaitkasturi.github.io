@@ -5,7 +5,7 @@ export default function AboutMe() {
   return (
     <section
       id="home"
-      className="bg-gradient-to-b from-[#fce3e1] to-[#e8e0f4] text-gray-800 px-4 sm:px-6 py-16 mt-24 rounded-3xl max-w-4xl mx-auto shadow-lg"
+      className="bg-black text-gray-200 px-4 sm:px-6 py-16 mt-0 sm:mt-10 rounded-3xl max-w-4xl mx-auto shadow-lg"
     >
       {/* Profile Image */}
       <div className="relative w-full flex justify-center mb-10">
@@ -19,28 +19,30 @@ export default function AboutMe() {
             />
           </div>
           <div className="text-center">
-            <h2 className="text-xl sm:text-2xl font-semibold text-[#1e2746]">
+            <h2 className="text-xl sm:text-2xl font-semibold text-white">
               Advait Kasturi
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 italic"></p>
+            <p className="text-sm sm:text-base text-gray-400 italic"></p>
           </div>
         </div>
       </div>
 
       {/* Headline */}
-      <h1 className="text-2xl sm:text-4xl font-bold text-center mb-3 text-gray-900 leading-tight">
-        Hi, I'm <span className="text-[#1e2746]">Advait</span> 👋
+      <h1 className="text-2xl sm:text-4xl font-bold text-center mb-3 text-white leading-tight">
+        Hi, I'm <span className="text-[#ff8357]">Advait</span> 👋
       </h1>
 
       {/* Subheading */}
-      <h3 className="text-lg sm:text-2xl text-center font-medium text-[#4b4b4b] mb-5 italic">
+      <h3 className="text-lg sm:text-2xl text-center font-medium text-gray-300 mb-5 italic">
         Fullstack Developer & Tech Explorer 🚀
       </h3>
 
       {/* Description */}
-      <p className="text-center text-gray-700 text-sm sm:text-lg leading-relaxed max-w-xl mx-auto mb-5 px-1 sm:px-0">
+      <p className="text-center text-gray-300 text-sm sm:text-lg leading-relaxed max-w-xl mx-auto mb-5 px-1 sm:px-0">
         Exploring the potential of{" "}
-        <span className="text-[#06b6d4] font-semibold">Artificial Intelligence</span>{" "}
+        <span className="text-[#06b6d4] font-semibold">
+          Artificial Intelligence
+        </span>{" "}
         and{" "}
         <span className="text-[#06b6d4] font-semibold">Machine Learning</span>{" "}
         to solve real-world problems. I blend smart algorithms with intuitive
@@ -48,7 +50,7 @@ export default function AboutMe() {
       </p>
 
       {/* Tech Stack */}
-      <p className="text-center text-gray-600 text-sm sm:text-lg mb-8 px-2">
+      <p className="text-center text-gray-400 text-sm sm:text-lg mb-8 px-2">
         Currently exploring{" "}
         <span className="text-[#8b5cf6] font-semibold">React</span>,{" "}
         <span className="text-[#8b5cf6] font-semibold">Flutter</span>,{" "}
@@ -70,20 +72,21 @@ export default function AboutMe() {
         {/* ✅ Projects */}
         <a
           href="#projects"
-          className="bg-[#1e2746] text-white text-sm sm:text-base px-6 py-2.5 rounded-full font-medium shadow-md hover:bg-[#2f3d6c] transition-all duration-300"
+          className="bg-white text-black text-sm sm:text-base px-6 py-2.5 rounded-full font-medium shadow-md hover:bg-gray-200 transition-all duration-300"
         >
           💼 My Projects
         </a>
       </div>
 
       {/* Quote */}
-      <blockquote className="italic text-center text-[#1e2746] max-w-sm sm:max-w-lg mx-auto px-3 sm:px-4 border-l-4 border-[#ff8357] pl-3 sm:pl-5 text-sm sm:text-lg">
-        "For me, every line of code is a step toward building something extraordinary."
+      <blockquote className="italic text-center text-gray-200 max-w-sm sm:max-w-lg mx-auto px-3 sm:px-4 border-l-4 border-[#ff8357] pl-3 sm:pl-5 text-sm sm:text-lg">
+        "For me, every line of code is a step toward building something
+        extraordinary."
       </blockquote>
 
       {/* Scroll Cue */}
       <div className="mt-10 flex justify-center">
-        <div className="animate-bounce text-gray-500 text-2xl">⌄</div>
+        <div className="animate-bounce text-gray-400 text-2xl">⌄</div>
       </div>
     </section>
   );

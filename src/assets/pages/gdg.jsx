@@ -9,7 +9,7 @@ import img5 from "@/assets/gdg/img5.jpg";
 import img6 from "@/assets/gdg/img6.jpg";
 import img7 from "@/assets/gdg/img7.jpg";
 
-const images = [img1, img2, img3, img4, img6, img7, img5 ];
+const images = [img1, img2, img3, img4, img6, img7, img5];
 
 export default function GDG() {
   const [index, setIndex] = useState(0);
@@ -23,16 +23,17 @@ export default function GDG() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white px-4 py-10 mt-20 flex flex-col items-center">
-      <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-400 via-violet-500 to-pink-400 bg-clip-text text-transparent">
-
+    <div className="min-h-screen bg-black text-white flex flex-col justify-center items-center px-4">
+      {/* Title */}
+      <h1 className="text-4xl font-bold text-center text-white">
+        GDG Gallery !
       </h1>
-      <p className="mt-4 text-lg text-center text-gray-300 max-w-2xl">
-
+      <p className="mt-2 text-lg text-center text-gray-300 max-w-2xl">
+        {/* Optional description */}
       </p>
 
       {/* Carousel Section */}
-      <div className="relative mt-12 w-full max-w-3xl h-[300px] sm:h-auto sm:aspect-[4/3] overflow-hidden rounded-lg">
+      <div className="relative mt-6 w-full max-w-3xl h-[300px] sm:h-[400px] overflow-hidden rounded-lg">
         <AnimatePresence initial={false} mode="wait">
           <motion.img
             key={images[index]}
@@ -42,20 +43,20 @@ export default function GDG() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.5 }}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-cover"
           />
         </AnimatePresence>
 
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-1.5 rounded-full"
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full"
         >
           ❮
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-1.5 rounded-full"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full"
         >
           ❯
         </button>
@@ -66,8 +67,8 @@ export default function GDG() {
         {images.map((_, i) => (
           <div
             key={i}
-            className={`w-2.5 h-2.5 rounded-full cursor-pointer transition ${
-              i === index ? "bg-pink-500 scale-110" : "bg-gray-600"
+            className={`w-3 h-3 rounded-full cursor-pointer ${
+              i === index ? "bg-pink-500" : "bg-gray-600"
             }`}
             onClick={() => setIndex(i)}
           />

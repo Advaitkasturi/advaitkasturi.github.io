@@ -30,7 +30,7 @@ export default function Hack() {
         <HackSection
         title="Vyoma-24Hr National Level Hackthon"
         description="A Hackathon organized by BVRIT on 29th Jul 2025. This is a prototype of an AI-powered learning website that features a dedicated chatbot developed by us. The website contains all the essential resources to learn AI, including projects based on it to help users improve their skills."
-        images={[ img6, img7, img8,img9, img10, img11]}
+        images={[ img8,img6,img7,img9,img10,img11]}
         githubLink="https://github.com/Advaitkasturi/LearnMatrix-vyoma-national-level-hackthon-"
       />
 

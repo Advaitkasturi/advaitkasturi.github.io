@@ -107,15 +107,15 @@ export default function Navbar() {
 
         {/* Dropdown Menu */}
         {menuOpen && (
-          <div className="flex flex-col bg-black border-t border-gray-900">
+          <div className="flex flex-col bg-black">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(link.name, link.href, e)}
-                className={`w-full py-3 px-6 text-left text-gray-300 font-medium border-b border-gray-900
-                  hover:bg-gray-900 hover:text-orange-400 transition
-                  ${active === link.name ? "text-orange-500 bg-gray-900" : ""}
+                className={`w-full py-3 px-6 text-left text-gray-300 font-medium
+                  hover:text-orange-400 transition
+                  ${active === link.name ? "text-orange-500" : ""}
                 `}
               >
                 {link.name}

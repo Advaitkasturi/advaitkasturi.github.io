@@ -102,15 +102,15 @@ export default function ContactFooter() {
 
         {/* --- Mobile View --- */}
         <div className="block sm:hidden">
-          <h2 className="text-2xl font-bold mb-5 text-white text-center px-4">
+          <h2 className="text-2xl font-bold mb-5 text-white text-left px-4">
             Let's Connect 🤝
           </h2>
 
-          <p className="text-gray-400 text-sm mb-6 px-6 text-center leading-relaxed">
+          <p className="text-gray-400 text-sm mb-6 px-4 text-left leading-relaxed">
             Whether you have a question, want to collaborate, or just say hi — my inbox is always open!
           </p>
 
-          <div className="flex flex-col gap-4 mb-6 px-6">
+          <div className="flex flex-col gap-4 mb-6 px-4">
             <a
               href="mailto:advaitkasturi20@gmail.com"
               className="bg-[#ff8357] text-white py-3 rounded-full font-semibold shadow-md hover:bg-[#ff6b3c] transition duration-300 text-center w-full"
@@ -125,7 +125,7 @@ export default function ContactFooter() {
             </a>
           </div>
 
-          <div className="flex justify-center gap-6 text-3xl mb-6 px-6">
+          <div className="flex justify-center gap-6 text-3xl mb-6 px-4">
             <a
               href="https://www.linkedin.com/in/advait-kasturi-5b1368286/"
               target="_blank"
@@ -180,7 +180,8 @@ export default function ContactFooter() {
             </a>
           </div>
 
-          <p className="text-center text-sm text-gray-500 select-none px-6">
+          {/* Centered Name and Year */}
+          <p className="text-center text-sm text-gray-500 select-none px-4">
             © {new Date().getFullYear()} Advait.
           </p>
         </div>

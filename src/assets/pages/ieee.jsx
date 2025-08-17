@@ -21,7 +21,7 @@ export default function IEEE() {
     <div className="min-h-screen bg-black text-white flex flex-col justify-center items-center px-4">
       {/* Optional Heading */}
       <h1 className="text-4xl font-bold text-center text-white">
-        IEEE Gallery !
+        
       </h1>
       <p className="mt-2 text-lg text-center text-gray-300">
        

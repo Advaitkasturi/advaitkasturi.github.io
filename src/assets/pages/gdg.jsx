@@ -26,7 +26,7 @@ export default function GDG() {
     <div className="min-h-screen bg-black text-white flex flex-col justify-center items-center px-4">
       {/* Title */}
       <h1 className="text-4xl font-bold text-center text-white">
-        GDG Gallery !
+        
       </h1>
       <p className="mt-2 text-lg text-center text-gray-300 max-w-2xl">
         {/* Optional description */}

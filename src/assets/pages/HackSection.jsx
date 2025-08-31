@@ -27,7 +27,7 @@ export default function HackSection({ title, description, images, githubLink }) 
         className="text-2xl sm:text-3xl md:text-4xl font-bold 
                    bg-gradient-to-r from-pink-500 via-violet-500 to-orange-400 
                    text-transparent bg-clip-text mb-4 
-                   text-left w-full"
+                   text-left md:text-center w-full"
       >
         {title}
       </h2>

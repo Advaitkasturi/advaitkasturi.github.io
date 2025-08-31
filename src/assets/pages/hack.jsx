@@ -35,8 +35,9 @@ export default function Hack() {
      <HackSection
         title="TECH-IGNITION2.0"
         description="On 23rd August 2025, the IEEE Student Branch of Guru Nanak Institutions (GNI) successfully organized a major technical event that brought together students, innovators, and tech enthusiasts to share knowledge, explore ideas, and foster collaboration As a Core Committee Member, I actively contributed to the planning, coordination, and execution of the event. Along with my team, I played a vital role in structuring the agenda, managing logistics, and ensuring smooth operations throughout the program. The experience not only enhanced my leadership and organizational skills, but also allowed me to collaborate with like-minded peers, industry professionals, and mentors to create an impactful and engaging event for participants."
-        images={[img27,img23,img24,img25,img26,]}
-        githubLink="https://github.com/Advaitkasturi/LearnMatrix-vyoma-national-level-hackthon-"
+        images={[img27,img23,img24,img25,img26,]
+        }
+
       />
 
         <HackSection

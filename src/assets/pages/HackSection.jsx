@@ -23,17 +23,21 @@ export default function HackSection({ title, description, images, githubLink }) 
   return (
     <section className="px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col items-center">
       {/* Title */}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold 
-                     bg-gradient-to-r from-pink-500 via-violet-500 to-orange-400 
-                     text-transparent bg-clip-text mb-4 
-                     text-left sm:text-center w-full sm:w-auto">
+      <h2
+        className="text-2xl sm:text-3xl md:text-4xl font-bold 
+                   bg-gradient-to-r from-pink-500 via-violet-500 to-orange-400 
+                   text-transparent bg-clip-text mb-4 
+                   text-center w-full"
+      >
         {title}
       </h2>
 
       {/* Description */}
-      <p className="text-gray-300 text-sm sm:text-base md:text-lg 
-                    max-w-3xl mb-8 leading-relaxed tracking-wide
-                    text-left sm:text-center w-full sm:w-auto">
+      <p
+        className="text-gray-300 text-sm sm:text-base md:text-lg 
+                   max-w-3xl mb-8 leading-relaxed tracking-wide
+                   text-center sm:text-left w-full"
+      >
         {description}
       </p>
 
@@ -141,7 +145,7 @@ export default function HackSection({ title, description, images, githubLink }) 
           href={githubLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-5 py-2.5 rounded-md text-sm sm:text-base font-medium shadow-md transition-all hover:scale-105"
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-5 py-2.5 rounded-md text-sm sm:text-base font-medium shadow-md transition-all hover:scale-105 mt-2 text-center"
         >
           <Github size={18} />
           View on GitHub
@@ -150,3 +154,4 @@ export default function HackSection({ title, description, images, githubLink }) 
     </section>
   );
 }
+

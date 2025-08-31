@@ -23,10 +23,22 @@ import img19 from "../hackathon/img19.jpg";
 import img20 from "../hackathon/img20.jpg";
 import img21 from "../hackathon/img21.jpg";
 import img22 from "../hackathon/img22.jpg";
+import img23 from "../hackathon/ieee1.jpg";
+import img24 from "../hackathon/ieee2.jpg";
+import img25 from "../hackathon/ieee3.jpg";
+import img26 from "../hackathon/ieee4.jpg";
+import img27 from "../hackathon/ieee5.jpg";
 export default function Hack() {
   return (
     <div className="min-h-screen bg-black text-white px-4 py-20 space-y-24">
       
+     <HackSection
+        title="TECH-IGNITION2.0"
+        description="On 23rd August 2025, the IEEE Student Branch of Guru Nanak Institutions (GNI) successfully organized a major technical event that brought together students, innovators, and tech enthusiasts to share knowledge, explore ideas, and foster collaboration As a Core Committee Member, I actively contributed to the planning, coordination, and execution of the event. Along with my team, I played a vital role in structuring the agenda, managing logistics, and ensuring smooth operations throughout the program. The experience not only enhanced my leadership and organizational skills, but also allowed me to collaborate with like-minded peers, industry professionals, and mentors to create an impactful and engaging event for participants."
+        images={[img27,img23,img24,img25,img26,]}
+        githubLink="https://github.com/Advaitkasturi/LearnMatrix-vyoma-national-level-hackthon-"
+      />
+
         <HackSection
         title="Vyoma-24Hr National Level Hackthon"
         description="A Hackathon organized by BVRIT on 29th Jul 2025. This is a prototype of an AI-powered learning website that features a dedicated chatbot developed by us. The website contains all the essential resources to learn AI, including projects based on it to help users improve their skills."

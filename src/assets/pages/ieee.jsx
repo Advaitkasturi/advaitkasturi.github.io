@@ -3,8 +3,12 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import img1 from "@/assets/ieee/img1.jpg";
 import img2 from "@/assets/ieee/img2.jpg";
-
-const images = [img1, img2];
+import img3 from "@/assets/ieee/ieee1.jpg";
+import img4 from "@/assets/ieee/ieee2.jpg";
+import img5 from "@/assets/ieee/ieee3.jpg";
+import img6 from "@/assets/ieee/ieee4.jpg";
+import img7 from "@/assets/ieee/ieee5.jpg";
+const images = [img3,img4,img1,img2,img5,img6,img7];
 
 export default function IEEE() {
   const [index, setIndex] = useState(0);

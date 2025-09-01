@@ -95,13 +95,13 @@ export default function Navbar() {
 
       {/* Mobile Navbar with Dropdown */}
       <nav className="md:hidden fixed top-0 left-0 w-full z-50 bg-black shadow-md">
-        <div className="flex justify-between items-center px-6 py-4">
+        <div className="flex justify-between items-center px-6 py-2">
           <h1 className="text-orange-500 font-bold text-lg">Advait</h1>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-white focus:outline-none"
           >
-            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+            {menuOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
 

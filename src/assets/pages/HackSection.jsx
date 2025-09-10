@@ -21,119 +21,81 @@ export default function HackSection({ title, description, images, githubLink }) 
   });
 
   return (
-    <section className="px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col items-center">
+    <section className="px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col items-center relative overflow-hidden">
+      {/* 🌌 Animated Gradient Background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-pink-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
+      </div>
+
       {/* Title */}
-      <h2
-        className="text-2xl sm:text-3xl md:text-4xl font-bold 
+      <motion.h2
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="text-2xl sm:text-3xl md:text-4xl font-extrabold 
                    bg-gradient-to-r from-pink-500 via-violet-500 to-orange-400 
                    text-transparent bg-clip-text mb-4 
                    text-left md:text-center w-full"
       >
         {title}
-      </h2>
+      </motion.h2>
 
-      {/* Description */}
-      <p
+      {/* Description (always left-aligned) */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.1 }}
         className="text-gray-300 text-sm sm:text-base md:text-lg 
                    max-w-3xl mb-8 leading-relaxed tracking-wide
                    text-left w-full"
       >
         {description}
-      </p>
+      </motion.p>
 
-      {/* Desktop Carousel */}
-      <div className="relative w-full max-w-3xl aspect-[4/3] overflow-hidden rounded-lg mb-3 shadow-lg border border-orange-400/20 bg-black/30 hidden sm:block">
-        <AnimatePresence initial={false} mode="wait">
-          <motion.img
-            key={images[index]}
-            src={images[index]}
-            alt={`Slide ${index + 1}`}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5 }}
-            className="w-full h-full object-cover sm:object-contain transition-all duration-500 ease-in-out"
-          />
-        </AnimatePresence>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
-          {images.map((_, i) => (
-            <div
-              key={i}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                i === index ? "bg-orange-400 scale-110" : "bg-white/30"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Desktop Arrows Below */}
-      <div className="hidden sm:flex justify-between w-full max-w-3xl mb-6 px-4">
-        <button
-          onClick={prevSlide}
-          aria-label="Previous slide"
-          className="bg-black/40 hover:bg-black/70 text-white p-4 rounded-full shadow-lg transition transform hover:scale-110 backdrop-blur-md"
-        >
-          ❮
-        </button>
-        <button
-          onClick={nextSlide}
-          aria-label="Next slide"
-          className="bg-black/40 hover:bg-black/70 text-white p-4 rounded-full shadow-lg transition transform hover:scale-110 backdrop-blur-md"
-        >
-          ❯
-        </button>
-      </div>
-
-      {/* Mobile Carousel */}
+      {/* === Carousel (Shared Style) === */}
       <div
         {...handlers}
-        className="relative w-full max-w-md aspect-[4/3] rounded-lg mb-3 shadow-lg border border-orange-400/20 bg-black/30 block sm:hidden select-none"
+        className="relative w-full max-w-3xl aspect-[16/9] overflow-hidden rounded-xl mb-6 shadow-xl border border-pink-500/20 bg-black/30 backdrop-blur-lg group flex items-center justify-center"
       >
         <AnimatePresence initial={false} mode="wait">
           <motion.img
             key={images[index]}
             src={images[index]}
             alt={`Slide ${index + 1}`}
-            initial={{ opacity: 0, x: 50, scale: 0.9 }}
+            initial={{ opacity: 0, x: 100, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: -50, scale: 0.9 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-full max-h-full object-contain rounded-lg mx-auto"
+            exit={{ opacity: 0, x: -100, scale: 0.95 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="max-w-full max-h-full object-contain rounded-lg transition-transform duration-500 ease-in-out group-hover:scale-[1.02]"
             draggable={false}
           />
         </AnimatePresence>
 
-        {/* Slide Indicators */}
-        <div className="flex space-x-3 absolute bottom-3 left-1/2 transform -translate-x-1/2 z-20">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`w-3 h-3 rounded-full transition-transform duration-300 ${
-                i === index ? "bg-orange-400 scale-125" : "bg-white/40"
-              }`}
-            />
-          ))}
+        {/* Progress Indicators (Bar Style) */}
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10">
+          <div
+            className="h-1 bg-gradient-to-r from-pink-500 to-orange-400 transition-all duration-500"
+            style={{ width: `${((index + 1) / images.length) * 100}%` }}
+          />
         </div>
       </div>
 
-      {/* Mobile Arrows Below */}
-      <div className="flex sm:hidden justify-between w-full max-w-md mb-6 px-4">
+      {/* Arrows */}
+      <div className="flex justify-between w-full max-w-3xl mb-6 px-4">
         <button
           onClick={prevSlide}
           aria-label="Previous slide"
-          className="bg-gradient-to-tr from-orange-500 to-pink-500 hover:brightness-110 text-white p-3 rounded-full shadow-lg transform hover:scale-110"
+          className="bg-gradient-to-tr from-pink-500 to-orange-500 hover:brightness-110 
+                     text-white p-4 rounded-full shadow-lg transition transform hover:scale-110"
         >
           ❮
         </button>
         <button
           onClick={nextSlide}
           aria-label="Next slide"
-          className="bg-gradient-to-tr from-orange-500 to-pink-500 hover:brightness-110 text-white p-3 rounded-full shadow-lg transform hover:scale-110"
+          className="bg-gradient-to-tr from-orange-500 to-pink-500 hover:brightness-110 
+                     text-white p-4 rounded-full shadow-lg transition transform hover:scale-110"
         >
           ❯
         </button>
@@ -141,15 +103,21 @@ export default function HackSection({ title, description, images, githubLink }) 
 
       {/* GitHub Button */}
       {githubLink && (
-        <a
+        <motion.a
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
           href={githubLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white px-5 py-2.5 rounded-md text-sm sm:text-base font-medium shadow-md transition-all hover:scale-105 mt-2 text-left"
+          className="inline-flex items-center gap-2 bg-gradient-to-r 
+                     from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 
+                     text-white px-6 py-3 rounded-lg text-sm sm:text-base font-semibold 
+                     shadow-md hover:shadow-pink-500/40 transition-all hover:scale-110"
         >
-          <Github size={18} />
+          <Github size={20} />
           View on GitHub
-        </a>
+        </motion.a>
       )}
     </section>
   );

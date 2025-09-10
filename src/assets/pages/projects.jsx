@@ -16,13 +16,26 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="bg-black text-white py-12 px-4 sm:px-8 md:px-20 flex flex-col items-center"
+      className="relative bg-black text-white py-16 px-4 sm:px-8 md:px-20 flex flex-col items-center overflow-hidden"
     >
-      <h2 className="text-3xl sm:text-4xl font-bold text-center mb-10 bg-gradient-to-r from-pink-400 via-violet-500 to-pink-400 bg-clip-text text-transparent">
-        Projects
-      </h2>
+      {/* 🌌 Animated Glow Background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-pink-500/20 rounded-full blur-[100px] animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-violet-500/20 rounded-full blur-[120px] animate-pulse" />
+      </div>
 
-      {/* Mobile View */}
+      {/* Title with shine animation */}
+      <motion.h2
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-4xl sm:text-5xl font-extrabold text-center mb-12 bg-gradient-to-r from-pink-400 via-violet-500 to-pink-400 bg-clip-text text-transparent 
+                   animate-text-shimmer bg-[length:200%_auto]"
+      >
+         Projects
+      </motion.h2>
+
+      {/* Mobile View - Swipeable Card */}
       <div className="sm:hidden w-full max-w-sm relative">
         <AnimatePresence initial={false} mode="wait">
           <motion.div
@@ -31,7 +44,7 @@ export default function Projects() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.4 }}
-            className="bg-[rgba(255,255,255,0.08)] backdrop-blur-lg rounded-2xl shadow-lg p-6 mb-4 cursor-grab select-none"
+            className="relative bg-[rgba(255,255,255,0.05)] backdrop-blur-lg border border-white/10 rounded-2xl shadow-lg p-6 mb-4 cursor-grab select-none overflow-hidden group"
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.2}
@@ -40,6 +53,9 @@ export default function Projects() {
               else if (info.offset.x > 80) handlePrev();
             }}
           >
+            {/* Glow border on hover */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500/30 to-violet-500/30 opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl" />
+
             <h3 className="text-xl font-semibold mb-3">{projectsData[index].name}</h3>
             <p className="text-gray-300 mb-4 text-sm leading-relaxed">{projectsData[index].description}</p>
 
@@ -48,7 +64,7 @@ export default function Projects() {
                 href={projectsData[index].liveLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-grow text-center bg-gradient-to-r from-pink-400 to-violet-500 text-black font-semibold py-2 rounded-md hover:from-pink-300 hover:to-violet-400 transition"
+                className="flex-grow text-center bg-gradient-to-r from-pink-400 to-violet-500 text-black font-semibold py-2 rounded-md shadow-md hover:shadow-pink-500/40 transition transform hover:scale-105"
               >
                 Live Demo
               </a>
@@ -56,31 +72,27 @@ export default function Projects() {
                 href={projectsData[index].repoLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-grow text-center bg-gradient-to-r from-gray-700 to-gray-500 text-white font-semibold py-2 rounded-md hover:from-gray-600 hover:to-gray-400 transition"
+                className="flex-grow text-center bg-gradient-to-r from-gray-700 to-gray-500 text-white font-semibold py-2 rounded-md shadow-md hover:shadow-gray-400/40 transition transform hover:scale-105"
               >
-                Git Repository
+                GitHub
               </a>
             </div>
-
-            <p className="mt-3 text-gray-400 text-[11px] text-center italic">
-             
-            </p>
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-between max-w-sm mx-auto px-4">
+        {/* Navigation Arrows */}
+        <div className="flex justify-between max-w-sm mx-auto px-4 mt-2">
           <button
             onClick={handlePrev}
             aria-label="Previous Project"
-            className="p-2 rounded-full bg-[#ff70b5] hover:bg-[#ff4c96] transition"
+            className="p-2 rounded-full bg-gradient-to-r from-violet-500 to-pink-500 hover:brightness-110 shadow-md hover:scale-110 transition"
           >
             <FiChevronLeft className="text-white" size={20} />
           </button>
           <button
             onClick={handleNext}
             aria-label="Next Project"
-            className="p-2 rounded-full bg-[#ff70b5] hover:bg-[#ff4c96] transition"
+            className="p-2 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 hover:brightness-110 shadow-md hover:scale-110 transition"
           >
             <FiChevronRight className="text-white" size={20} />
           </button>
@@ -89,34 +101,40 @@ export default function Projects() {
         {/* Pagination Dots */}
         <div className="flex justify-center gap-2 mt-3">
           {projectsData.map((_, i) => (
-            <span
+            <motion.span
               key={i}
-              className={`w-2.5 h-2.5 rounded-full cursor-pointer transition ${
-                i === index ? "bg-pink-500" : "bg-gray-600"
+              className={`w-3 h-3 rounded-full cursor-pointer transition ${
+                i === index ? "bg-pink-500 scale-125" : "bg-gray-600"
               }`}
               onClick={() => setIndex(i)}
+              whileTap={{ scale: 0.9 }}
             />
           ))}
         </div>
       </div>
 
       {/* Desktop & Tablet View */}
-      <div className="hidden sm:grid gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-7xl">
+      <div className="hidden sm:grid gap-8 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-7xl">
         {projectsData.map((project, idx) => (
-          <div
+          <motion.div
             key={idx}
-            className="bg-[rgba(255,255,255,0.08)] backdrop-blur-lg rounded-2xl shadow-lg p-6 flex flex-col justify-between hover:scale-105 transition-transform duration-300"
+            whileHover={{ scale: 1.05, rotateX: 5, rotateY: -5 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="relative bg-[rgba(255,255,255,0.05)] backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg p-6 flex flex-col justify-between overflow-hidden group"
           >
+            {/* Glow on hover */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500/20 to-violet-500/20 opacity-0 group-hover:opacity-100 transition duration-500 blur-xl" />
+
             <div>
               <h3 className="text-xl font-semibold mb-3">{project.name}</h3>
               <p className="text-gray-300 mb-4 text-sm leading-relaxed">{project.description}</p>
             </div>
-            <div className="mt-6 flex gap-4">
+            <div className="mt-6 flex gap-4 relative z-10">
               <a
                 href={project.liveLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-grow text-center bg-gradient-to-r from-pink-400 to-violet-500 text-black font-semibold py-2 rounded-md hover:from-pink-300 hover:to-violet-400 transition"
+                className="flex-grow text-center bg-gradient-to-r from-pink-400 to-violet-500 text-black font-semibold py-2 rounded-md shadow-md hover:shadow-pink-500/40 transition transform hover:scale-105"
               >
                 Live Demo
               </a>
@@ -124,12 +142,12 @@ export default function Projects() {
                 href={project.repoLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-grow text-center bg-gradient-to-r from-gray-700 to-gray-500 text-white font-semibold py-2 rounded-md hover:from-gray-600 hover:to-gray-400 transition"
+                className="flex-grow text-center bg-gradient-to-r from-gray-700 to-gray-500 text-white font-semibold py-2 rounded-md shadow-md hover:shadow-gray-400/40 transition transform hover:scale-105"
               >
-                Git Repository
+                GitHub
               </a>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

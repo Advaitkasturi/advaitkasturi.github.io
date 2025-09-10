@@ -57,46 +57,55 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="py-14 px-4 bg-gradient-to-b from-black via-[#1a1310] to-[#2b1a14] text-white transition-colors duration-500"
+      className="relative py-20 px-6 bg-gradient-to-b from-black via-[#0e0a08] to-[#1a1411] text-white overflow-hidden"
     >
+      {/* Subtle moving gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-pink-500/10 to-violet-500/10 animate-pulse blur-3xl" />
+
+      {/* Section Title */}
       <motion.h2
-        className="text-center text-4xl font-bold mb-4"
-        initial={{ opacity: 0, y: -30 }}
+        className="relative text-center text-4xl sm:text-5xl font-extrabold mb-6 bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent drop-shadow-lg"
+        initial={{ opacity: 0, y: -40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <span className="text-orange-500">&lt;Skills/&gt;</span> My TechStack
-      </motion.h2>
-      <motion.p
-        className="text-center text-gray-300 max-w-2xl mx-auto mb-12"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        A blend of technologies I’ve mastered, tools I adore, and a few I’m still learning (because tech never stops evolving! 🚀)
+        &lt;Skills /&gt; My TechStack
+      </motion.h2>
+
+      <motion.p
+        className="relative text-center text-gray-300 max-w-2xl mx-auto mb-14 leading-relaxed"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        A blend of technologies I’ve mastered, tools I adore, and a few I’m still
+        learning (because tech never stops evolving! 🚀)
       </motion.p>
 
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {/* Skill Cards */}
+      <div className="relative grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {skillsData.map((section, idx) => (
           <motion.div
             key={idx}
-            className="bg-gradient-to-b from-[#1c1310] to-[#241814] rounded-2xl shadow-lg p-6 border border-gray-700 hover:shadow-orange-500/30 hover:-translate-y-2 transition-transform duration-300 flex flex-col"
-            initial={{ opacity: 0, y: 30 }}
+            className="bg-gradient-to-b from-[#181210]/90 to-[#221814]/90 backdrop-blur-xl rounded-2xl shadow-lg p-6 border border-[#2e2a28] hover:shadow-orange-500/30 transition-transform duration-300 flex flex-col"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: idx * 0.1 }}
-            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.6, delay: idx * 0.15 }}
+            whileHover={{ scale: 1.05 }}
           >
-            <h3 className="text-xl font-semibold mb-2 text-orange-500 text-center">
+            <h3 className="text-xl font-semibold mb-2 text-center text-orange-400">
               &lt;{section.category}/&gt;
             </h3>
-            <p className="text-sm text-gray-400 text-center mb-4">{section.tagline}</p>
+            <p className="text-sm text-gray-400 text-center mb-6">
+              {section.tagline}
+            </p>
 
-            <div className="grid grid-cols-3 gap-3 mt-auto">
+            <div className="grid grid-cols-3 gap-4 mt-auto">
               {section.items.map((skill, i) => (
                 <motion.div
                   key={i}
-                  className={`flex justify-center items-center p-3 border-2 ${skill.border} rounded-xl bg-white hover:bg-gray-200 transition`}
-                  whileHover={{ scale: 1.08, rotate: -2 }}
+                  className={`flex justify-center items-center p-3 border-2 ${skill.border} rounded-xl bg-white/90 hover:bg-white transition shadow-md`}
+                  whileHover={{ scale: 1.12, rotate: -3 }}
                 >
                   <img
                     src={skill.img}

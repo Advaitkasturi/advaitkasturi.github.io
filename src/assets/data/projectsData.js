@@ -1,21 +1,31 @@
 // Example: src/assets/data/projectsData.js
+import ieeePreview from "../projects/ieee.png";
+import spotifyPreview from "../projects/spotify.png";
+import amazonPreview from "../projects/amazon.png";
+
 export default [
   {
     name: "IEEE-GNI (College`s Official Website)",
-    description: "A responsive College Student Club Website built with React and Tailwind CSS.",
+    description: "Official College IEEE Website",
     liveLink: "https://ieeegnitc.org/",
-    repoLink: ""
+    repoLink: "",
+    image: ieeePreview,  
+    tags: ["React", "Tailwind", "Full stack"]
   },
   {
-    name: "Spotify Clone ",
-    description: "A clone of spotify !",
+    name: "Spotify Clone",
+    description: "A clone of Spotify!",
     liveLink: "",
-    repoLink: "https://github.com/Advaitkasturi/Spotify-clone"
+    repoLink: "https://github.com/Advaitkasturi/Spotify-clone",
+    image: spotifyPreview,
+    tags: ["HTML", "CSS", "JavaScript"]
   },
   {
     name: "Amazon Clone",
-    description: "A clone website of amazon.com",
+    description: "A clone website of Amazon.com",
     liveLink: "",
-    repoLink: "https://github.com/Advaitkasturi/Amazon-clone"
+    repoLink: "https://github.com/Advaitkasturi/Amazon-clone",
+    image: amazonPreview,
+    tags: ["React", "Redux", "Firebase"]
   }
 ];

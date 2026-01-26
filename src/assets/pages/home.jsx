@@ -153,7 +153,7 @@ export default function AboutMe() {
             transition={{ delay: 0.55 }}
             className="flex flex-wrap gap-3 mb-10"
           >
-            {["React", "Flutter", "Java", "Firebase", "Node.js", "MongoDB"].map(
+            {["React", "Flutter", "Java", "Firebase", "Cloudinary", "MongoDB"].map(
               (tech, idx) => (
                 <span
                   key={idx}

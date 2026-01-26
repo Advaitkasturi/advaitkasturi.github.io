@@ -4,115 +4,171 @@ import { motion } from "framer-motion";
 const skillsData = [
   {
     category: "Web Development",
-    tagline: "I speak fluent HTML, CSS, and JavaScript!",
+    tagline: "Building fast, responsive and modern web apps.",
     items: [
-      { name: "HTML5", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", border: "border-orange-500" },
-      { name: "CSS3", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", border: "border-blue-500" },
-      { name: "JavaScript", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", border: "border-yellow-400" },
-      { name: "TypeScript", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", border: "border-blue-400" },
-      { name: "React", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", border: "border-cyan-400" },
-      { name: "Next.js", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original-wordmark.svg", border: "border-white" },
-      { name: "Node.js", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", border: "border-green-500" },
-      { name: "TailwindCSS", img: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg", border: "border-cyan-500" },
-      { name: "MongoDB", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", border: "border-green-500" }
-    ]
+      {
+        name: "HTML5",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+      },
+      {
+        name: "CSS3",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+      },
+      {
+        name: "JavaScript",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      },
+      {
+        name: "TypeScript",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      },
+      {
+        name: "React",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      },
+  
+      {
+        name: "TailwindCSS",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      },
+      {
+        name: "MongoDB",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+      },
+    ],
   },
   {
     category: "App Development",
-    tagline: "From iOS to Android, I've got you covered!",
+    tagline: "Cross-platform apps with smooth UI & performance.",
     items: [
-      { name: "Flutter", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", border: "border-blue-400" },
-      { name: "React Native", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", border: "border-cyan-400" },
-      { name: "Kotlin", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg", border: "border-purple-500" },
-      { name: "Swift", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg", border: "border-orange-400" },
-      { name: "Java", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", border: "border-red-500" }
-    ]
-  },
-  {
-    category: "AI & ML",
-    tagline: "Teaching computers to think… sort of.",
-    items: [
-      { name: "Python", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", border: "border-yellow-400" },
-      { name: "TensorFlow", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg", border: "border-orange-500" },
-      { name: "PyTorch", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg", border: "border-red-500" },
-      { name: "Keras", img: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Keras_logo.svg", border: "border-red-400" },
-      { name: "Scikit-learn", img: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg", border: "border-yellow-500" },
-      { name: "OpenCV", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg", border: "border-blue-400" }
-    ]
+      {
+        name: "Flutter",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+      },
+      {
+        name: "React Native",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      },
+    
+      {
+        name: "Java",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+      },
+    ],
   },
   {
     category: "Design",
-    tagline: "Making things pretty, one pixel at a time.",
+    tagline: "Designing clean UI/UX and visuals that feel premium.",
     items: [
-      { name: "Figma", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", border: "border-pink-500" },
-      { name: "Adobe XD", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg", border: "border-purple-500" },
-      { name: "Canva", img: "https://upload.wikimedia.org/wikipedia/commons/2/26/Canva_Logo.svg", border: "border-cyan-400" },
-      { name: "Photoshop", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-line.svg", border: "border-blue-500" },
-      { name: "Illustrator", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-line.svg", border: "border-orange-500" }
-    ]
-  }
+      {
+        name: "Figma",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+      },
+      {
+        name: "Adobe XD",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg",
+      },
+      // ✅ Canva fixed icon (old SVG sometimes doesn't load)
+      {
+        name: "Canva",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg",
+      },
+      {
+        name: "Photoshop",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-line.svg",
+      },
+      {
+        name: "Illustrator",
+        img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-line.svg",
+      },
+    ],
+  },
 ];
 
 const Skills = () => {
   return (
     <section
       id="skills"
-      className="relative py-20 px-6 bg-gradient-to-b from-black via-[#0e0a08] to-[#1a1411] text-white overflow-hidden"
+      className="relative py-20 px-6 bg-black text-white overflow-hidden"
     >
-      {/* Subtle moving gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-pink-500/10 to-violet-500/10 animate-pulse blur-3xl" />
+      {/* ✨ Soft White Glow Background (still BLACK base) */}
+      <div className="absolute inset-0 -z-10 bg-black">
+        <div className="absolute -top-28 -left-28 w-[520px] h-[520px] bg-white/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-[-160px] right-[-160px] w-[620px] h-[620px] bg-white/10 rounded-full blur-[160px]" />
+        <div className="absolute top-[35%] left-[55%] w-[420px] h-[420px] bg-white/5 rounded-full blur-[140px]" />
+      </div>
 
-      {/* Section Title */}
+      {/* Title */}
       <motion.h2
-        className="relative text-center text-4xl sm:text-5xl font-extrabold mb-6 bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent drop-shadow-lg"
-        initial={{ opacity: 0, y: -40 }}
+        className="relative text-center text-4xl sm:text-5xl font-extrabold mb-6 tracking-tight"
+        initial={{ opacity: 0, y: -25 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
       >
-        &lt;Skills /&gt; My TechStack
+        <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+          &lt;Skills /&gt; My TechStack
+        </span>
       </motion.h2>
 
       <motion.p
-        className="relative text-center text-gray-300 max-w-2xl mx-auto mb-14 leading-relaxed"
+        className="relative text-center text-gray-400 max-w-2xl mx-auto mb-14 leading-relaxed"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{ duration: 0.7, delay: 0.15 }}
+        viewport={{ once: true }}
       >
-        A blend of technologies I’ve mastered, tools I adore, and a few I’m still
-        learning (because tech never stops evolving! 🚀)
+ 
       </motion.p>
 
       {/* Skill Cards */}
-      <div className="relative grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="relative grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {skillsData.map((section, idx) => (
           <motion.div
             key={idx}
-            className="bg-gradient-to-b from-[#181210]/90 to-[#221814]/90 backdrop-blur-xl rounded-2xl shadow-lg p-6 border border-[#2e2a28] hover:shadow-orange-500/30 transition-transform duration-300 flex flex-col"
-            initial={{ opacity: 0, y: 40 }}
+            className="relative rounded-3xl p-6 border border-white/10 bg-white/5 backdrop-blur-2xl 
+                       shadow-[0_0_55px_rgba(0,0,0,0.6)] overflow-hidden"
+            initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: idx * 0.15 }}
-            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.55, delay: idx * 0.12 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.03 }}
           >
-            <h3 className="text-xl font-semibold mb-2 text-center text-orange-400">
-              &lt;{section.category}/&gt;
+            {/* Top Shine Line */}
+            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+
+            {/* Category */}
+            <h3 className="text-xl font-bold mb-2 text-center text-white">
+              &lt;{section.category} /&gt;
             </h3>
+
             <p className="text-sm text-gray-400 text-center mb-6">
               {section.tagline}
             </p>
 
+            {/* Skills Grid */}
             <div className="grid grid-cols-3 gap-4 mt-auto">
               {section.items.map((skill, i) => (
                 <motion.div
                   key={i}
-                  className={`flex justify-center items-center p-3 border-2 ${skill.border} rounded-xl bg-white/90 hover:bg-white transition shadow-md`}
-                  whileHover={{ scale: 1.12, rotate: -3 }}
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 14 }}
+                  className="group flex flex-col items-center justify-center gap-2 p-3 rounded-2xl 
+                             border border-white/10 bg-white/5 hover:bg-white/10 
+                             shadow-[0_0_25px_rgba(0,0,0,0.45)]"
                 >
-                  <img
-                    src={skill.img}
-                    alt={skill.name}
-                    className="h-10 w-10 object-contain"
-                    loading="lazy"
-                  />
+                  <div className="w-12 h-12 rounded-xl bg-white/90 flex items-center justify-center">
+                    <img
+                      src={skill.img}
+                      alt={skill.name}
+                      className="h-8 w-8 object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <p className="text-[11px] text-gray-300 group-hover:text-white transition text-center">
+                    {skill.name}
+                  </p>
                 </motion.div>
               ))}
             </div>

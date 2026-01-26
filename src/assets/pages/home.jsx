@@ -1,161 +1,215 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
 import AdvaitImage from "../pictures/AdvaitK.jpg"; // ✅ Ensure path is correct
 
 export default function AboutMe() {
   return (
     <section
       id="home"
-      className="relative bg-gradient-to-br from-black via-gray-900 to-black 
-                 text-gray-200 px-6 sm:px-10 py-20 mt-0 sm:mt-10 
-                 rounded-3xl max-w-7xl mx-auto shadow-2xl border border-gray-800/40 
+      className="relative bg-black text-white px-6 sm:px-10 py-20 mt-0 sm:mt-10 
+                 rounded-3xl max-w-7xl mx-auto shadow-2xl border border-white/10 
                  flex flex-col lg:flex-row items-center lg:items-start gap-12 overflow-hidden"
     >
-      {/* 🌌 Animated Background Blobs */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-20 left-10 w-80 h-80 bg-[#ff8357]/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#06b6d4]/20 rounded-full blur-3xl animate-pulse" />
+      {/* ✨ Premium White Glow Background */}
+      <div className="absolute inset-0 -z-10 bg-black">
+        <div className="absolute -top-28 -left-28 w-[520px] h-[520px] bg-white/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-[-160px] right-[-160px] w-[650px] h-[650px] bg-white/10 rounded-full blur-[170px]" />
+        <div className="absolute top-[35%] left-[55%] w-[420px] h-[420px] bg-white/5 rounded-full blur-[140px]" />
       </div>
 
-      {/* 👤 Profile Image Section */}
+      {/* 👤 Profile Section */}
       <motion.div
         initial={{ opacity: 0, x: -60 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
         className="flex flex-col items-center text-center lg:text-left"
       >
+        {/* Image + Glow Ring */}
         <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="relative w-40 h-40 sm:w-52 sm:h-52 rounded-full overflow-hidden 
-                     ring-4 ring-[#ff8357]/70 shadow-2xl 
-                     transition-transform duration-500 hover:scale-110 hover:ring-[#ff8357]"
+          whileHover={{ scale: 1.06 }}
+          transition={{ type: "spring", stiffness: 200, damping: 15 }}
+          className="relative"
         >
-          <img
-            src={AdvaitImage}
-            alt="Advait Kasturi"
-            className="w-full h-full object-cover object-top"
-            loading="lazy"
-          />
+          <div className="absolute inset-0 rounded-full blur-2xl bg-white/15" />
+          <div
+            className="relative w-40 h-40 sm:w-52 sm:h-52 rounded-full overflow-hidden 
+                       ring-4 ring-white/10 shadow-2xl border border-white/10"
+          >
+            <img
+              src={AdvaitImage}
+              alt="Advait Kasturi"
+              className="w-full h-full object-cover object-top"
+              loading="lazy"
+            />
+          </div>
         </motion.div>
-        <div className="mt-5">
-          <h2 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-[#ff8357] via-[#ff6b3c] to-[#ff8357] bg-clip-text text-transparent">
-            Advait Kasturi
+
+        {/* Name + Role */}
+        <div className="mt-6">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+              Advait Kasturi
+            </span>
           </h2>
-          <p className="text-sm sm:text-lg text-gray-400 mt-1">
-            Fullstack Developer
+
+          <p className="text-sm sm:text-lg text-gray-400 mt-2">
+            Fullstack Developer • Tech Explorer
           </p>
+
+          {/* Social Links */}
+          <div className="mt-5 flex items-center justify-center lg:justify-start gap-4">
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 
+                         transition duration-300 hover:scale-110"
+              aria-label="GitHub"
+            >
+              <FaGithub className="text-xl text-white" />
+            </a>
+
+            <a
+              href="https://linkedin.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 
+                         transition duration-300 hover:scale-110"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin className="text-xl text-white" />
+            </a>
+
+            <a
+              href="https://instagram.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 
+                         transition duration-300 hover:scale-110"
+              aria-label="Instagram"
+            >
+              <FaInstagram className="text-xl text-white" />
+            </a>
+
+            <a
+              href="mailto:advait@example.com"
+              className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 
+                         transition duration-300 hover:scale-110"
+              aria-label="Mail"
+            >
+              <HiOutlineMail className="text-xl text-white" />
+            </a>
+          </div>
         </div>
       </motion.div>
 
-      {/* 📝 Text Content Section */}
+      {/* 📝 Content Card */}
       <motion.div
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
-        className="flex-1 backdrop-blur-md bg-white/5 rounded-2xl p-8 border border-gray-800/30 shadow-lg"
+        transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
+        className="flex-1 relative"
       >
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="text-2xl sm:text-4xl font-extrabold mb-4 leading-snug text-white"
-        >
-          Hi, I'm <span className="text-[#ff8357]">Advait</span> 👋
-        </motion.h1>
+        <div className="relative rounded-3xl p-8 sm:p-10 border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.65)]">
+          {/* Top Shine */}
+          <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/25 to-transparent" />
 
-        {/* Subheading */}
-        <motion.h3
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="text-lg sm:text-xl font-medium text-gray-300 mb-6"
-        >
-          Fullstack Developer & Technology Explorer 🚀
-        </motion.h3>
-
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-gray-300 text-sm sm:text-lg leading-relaxed mb-6"
-        >
-          I’m deeply curious about{" "}
-          <span className="text-[#06b6d4] font-semibold">
-            Artificial Intelligence
-          </span>{" "}
-          and{" "}
-          <span className="text-[#06b6d4] font-semibold">
-            Machine Learning
-          </span>
-          , striving to create practical solutions for real-world challenges.
-          With a balance of smart algorithms and thoughtful design, I craft{" "}
-          <span className="text-[#ff8357] font-semibold">
-            intelligent, user-focused digital experiences
-          </span>{" "}
-          across web and mobile platforms.
-        </motion.p>
-
-        {/* Tech Stack */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="text-gray-400 text-sm sm:text-lg mb-10"
-        >
-          Currently exploring{" "}
-          <span className="text-[#8b5cf6] font-semibold">React</span>,{" "}
-          <span className="text-[#8b5cf6] font-semibold">Flutter</span>,{" "}
-          <span className="text-[#06b6d4] font-semibold">AI/ML</span> &{" "}
-          <span className="text-[#f43f5e] font-semibold">AI Bots</span>.
-        </motion.p>
-
-        {/* 🎯 Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          className="flex flex-wrap gap-5 mb-12"
-        >
-          {/* Download CV */}
-          <a
-            href="/Advait_Kasturi_CV.pdf"
-            download="Advait_Kasturi_CV.pdf"
-            className="bg-gradient-to-r from-[#ff8357] to-[#ff6b3c] text-white 
-                       text-sm sm:text-base px-7 py-3 rounded-full font-semibold 
-                       shadow-lg hover:shadow-[#ff8357]/50 hover:scale-110 
-                       transition-transform duration-300"
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="text-2xl sm:text-4xl font-extrabold mb-4 leading-snug text-white"
           >
-            ⬇️ Download CV
-          </a>
+            Hi, I'm <span className="text-gray-200">Advait</span> 👋
+          </motion.h1>
 
-          {/* Projects */}
-          <a
-            href="#projects"
-            className="bg-white text-black text-sm sm:text-base px-7 py-3 rounded-full 
-                       font-semibold shadow-md hover:bg-gray-200 hover:scale-110 
-                       transition-transform duration-300"
+          {/* Subheading */}
+          <motion.h3
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="text-lg sm:text-xl font-medium text-gray-300 mb-6"
           >
-            💼 View Projects
-          </a>
-        </motion.div>
+            I build modern web & app experiences with clean UI ⚡
+          </motion.h3>
 
-        {/* ✨ Quote */}
-        <motion.blockquote
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="relative max-w-2xl px-4 sm:px-6 mb-10"
-        >
-          <span className="absolute -left-2 top-0 text-5xl text-[#ff8357]/30 font-serif">
-            “
-          </span>
-          <p className="italic text-gray-200 text-sm sm:text-lg leading-relaxed border-l-4 border-[#ff8357] pl-5">
-            For me, every line of code is a step toward building something extraordinary.
-          </p>
-        </motion.blockquote>
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
+            className="text-gray-300 text-sm sm:text-lg leading-relaxed mb-7"
+          >
+           
+          </motion.p>
+
+          {/* Tech Pills */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55 }}
+            className="flex flex-wrap gap-3 mb-10"
+          >
+            {["React", "Flutter", "Java", "Firebase", "Node.js", "MongoDB"].map(
+              (tech, idx) => (
+                <span
+                  key={idx}
+                  className="px-4 py-2 rounded-full text-sm bg-white/5 border border-white/10 
+                             text-gray-200 hover:bg-white/10 transition duration-300"
+                >
+                  {tech}
+                </span>
+              )
+            )}
+          </motion.div>
+
+          {/* 🎯 Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65 }}
+            className="flex flex-wrap gap-5 mb-12"
+          >
+            {/* Download CV */}
+            <a
+              href="/Advait_Kasturi_CV.pdf"
+              download="Advait_Kasturi_CV.pdf"
+              className="bg-white text-black text-sm sm:text-base px-7 py-3 rounded-full font-semibold 
+                         shadow-lg hover:bg-gray-200 hover:scale-110 transition-transform duration-300"
+            >
+              ⬇️ Download CV
+            </a>
+
+            {/* Projects */}
+            <a
+              href="#projects"
+              className="bg-white/10 text-white text-sm sm:text-base px-7 py-3 rounded-full 
+                         font-semibold border border-white/15 hover:bg-white/15 hover:scale-110 
+                         transition-transform duration-300"
+            >
+              💼 View Projects
+            </a>
+          </motion.div>
+
+          {/* ✨ Quote */}
+          <motion.blockquote
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.75 }}
+            className="relative max-w-2xl px-4 sm:px-6"
+          >
+            <span className="absolute -left-2 top-0 text-5xl text-white/20 font-serif">
+              “
+            </span>
+            <p className="italic text-gray-200 text-sm sm:text-lg leading-relaxed border-l-4 border-white/20 pl-5">
+              For me, every line of code is a step toward building something
+              extraordinary.
+            </p>
+          </motion.blockquote>
+        </div>
       </motion.div>
 
       {/* ⌄ Scroll Cue */}
@@ -165,7 +219,7 @@ export default function AboutMe() {
         transition={{ delay: 1 }}
         className="absolute bottom-6 flex w-full justify-center"
       >
-        <div className="animate-bounce text-gray-400 text-3xl animate-pulse">⌄</div>
+        <div className="animate-bounce text-gray-400 text-3xl">⌄</div>
       </motion.div>
     </section>
   );

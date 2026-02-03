@@ -84,15 +84,16 @@ export default function ExperienceSection() {
 
       {/* Title */}
       <motion.h2
-        initial={{ opacity: 0, y: 18 }}
+        initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-4xl font-extrabold text-center mb-10 tracking-tight"
+        viewport={{ once: true }}
+        className="text-4xl sm:text-5xl font-extrabold mb-14 tracking-tight"
       >
-        <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
           Experience
         </span>
+        <span className="block mt-3 w-20 h-[3px] mx-auto bg-white/40 rounded-full" />
       </motion.h2>
 
       <div className="w-full flex flex-col items-center">

@@ -253,7 +253,7 @@ export default function ExperienceSection() {
                   <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
 
                   <div className="flex items-start justify-between gap-4 mb-6">
-                    <h3 className="text-xl md:text-3xl font-bold text-white leading-snug">
+                    <h3 className="text-xl md:text-2xl font-bold text-white leading-snug">
                       {exp.title}
                     </h3>
 

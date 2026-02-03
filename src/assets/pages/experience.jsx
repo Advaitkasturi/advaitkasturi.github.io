@@ -5,23 +5,39 @@ import { Link } from "react-router-dom";
 
 const experiences = [
   {
-    title: "Tech Lead @ IEEE Student Branch GNI",
-    description: [
-      "Designed IEEE - GNI WEBSITE (2025) - ",
-      <a
-        key="link"
-        href="https://ieeegnitc.org/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-white underline decoration-white/40 hover:decoration-white hover:text-gray-200 transition"
-      >
-        ieeegnitc.org
-      </a>,
-      ". Oversaw tech initiatives and app/web development projects.",
-      " Managed a cross-functional team for event web apps and promotional material.",
-      " Designed UI/UX assets and implemented responsive layouts.",
-      " Formed and onboarded the technical team.",
-    ],
+    title: "TECH LEAD @ IEEE STUDENT BRANCH - GNI",
+description: [
+  <>
+    Designed IEEE - GNI WEBSITE (2025) –{" "}
+    <a
+      href="https://ieeegnitc.org/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-white underline decoration-white/40 hover:decoration-white hover:text-gray-200 transition"
+    >
+      ieee.gnitc.org
+    </a>
+  </>,
+  <>
+    Designed{" "}
+    <span className="font-medium">
+      UI/UX assets
+    </span>{" "}
+    and implemented{" "}
+    <span className="font-medium">
+      responsive layouts
+    </span>
+    .
+  </>,
+  <>
+    Formed and onboarded the{" "}
+    <span className="font-medium">
+      technical team
+    </span>
+    .
+  </>
+],
+
     button: {
       text: "Visit Website",
       link: "https://ieeegnitc.org/",
@@ -32,12 +48,11 @@ const experiences = [
     },
   },
   {
-    title: "Web Development Lead @ Google Developer Groups on Campus - GNI",
+    title: "WEB DEV LEAD @ GOOGLE DEVELOPER GROUPS ON CAMPUS - GNI",
     description: [
       "Organized and led the Web Development Bootcamp (April 2025).",
-      " Coordinated design workflows and collaborated with graphic designers.",
       " Provided technical support during the GEN-AI Bootcamp (February 2025).",
-      " Assisted the core team with technical and event coordination support.",
+  
     ],
     routeButton: {
       text: "GDG",

@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
-import AdvaitImage from "../pictures/AdvaitK.jpg"; // ✅ Ensure path is correct
+import AdvaitImage from "../pictures/AdvaitK.jpg";
 
 export default function AboutMe() {
   return (
@@ -153,7 +153,7 @@ export default function AboutMe() {
             transition={{ delay: 0.55 }}
             className="flex flex-wrap gap-3 mb-10"
           >
-            {["React", "Flutter", "Java", "Firebase", "Cloudinary", "MongoDB"].map(
+            {["React", "Flutter", "Python" ,"Java", "Firebase", "Cloudinary"].map(
               (tech, idx) => (
                 <span
                   key={idx}
@@ -192,9 +192,19 @@ export default function AboutMe() {
             >
               💼 View Projects
             </a>
+
+               {/* Certificates */}
+            <a
+              href="https://drive.google.com/drive/folders/1WgBSo4wDvXjQKr7Ni-e4XGKKIRyJhzMU?usp=sharing"
+              className="bg-white/10 text-white text-sm sm:text-base px-7 py-3 rounded-full 
+                         font-semibold border border-white/15 hover:bg-white/15 hover:scale-110 
+                         transition-transform duration-300"
+            >
+              📜 View Certificates
+            </a>
           </motion.div>
 
-          {/* ✨ Quote */}
+          {/* Quote */}
           <motion.blockquote
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}

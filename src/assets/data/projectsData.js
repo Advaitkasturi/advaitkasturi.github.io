@@ -5,7 +5,7 @@ import amazonPreview from "../projects/amazon.png";
 
 export default [
   {
-    name: "IEEE-GNI (College`s Official Website)",
+    name: "IEEE-GNI (College`s Official IEEE Website)",
     description: "Official College IEEE Website",
     liveLink: "https://ieeegnitc.org/",
     repoLink: "",

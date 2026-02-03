@@ -5,13 +5,14 @@ import {
   FiChevronRight,
   FiExternalLink,
   FiGithub,
+  FiDownload,
 } from "react-icons/fi";
 import projectsData from "@/assets/data/projectsData";
 
 export default function Projects() {
   const [index, setIndex] = useState(0);
 
-  // ❌ Remove "Clones" projects
+  // ❌ Remove clone projects
   const baseProjects = projectsData.filter(
     (p) =>
       !(
@@ -20,10 +21,9 @@ export default function Projects() {
       )
   );
 
-  // ✅ Update IEEE Website live + github link
+  // ✅ IEEE website links
   const updatedProjects = baseProjects.map((p) => {
     const name = (p.name || "").toLowerCase();
-
     if (name.includes("ieee")) {
       return {
         ...p,
@@ -31,30 +31,40 @@ export default function Projects() {
         repoLink: "https://github.com/Advaitkasturi",
       };
     }
-
     return p;
   });
 
-  // ✅ Add CampusHub + Learn Matrix as custom projects
+  // ✅ Priority projects
+  const campusHub = {
+    name: "Campus Hub",
+    description:
+      "An all-in-one campus platform for Events Discovery + Registration , Notices and Lost & Found Built to reduce scattered information and improve campus engagement with a clean, role-based experience.",
+    tags: ["Flutter", "Firebase", "Cloudinary", "Notifications", ],
+    apkLink:
+      "https://drive.google.com/drive/folders/1C8S2E1nYzUHKZeK1JJE6R_9PEyjZkGZj?usp=sharing",
+    repoLink: "https://github.com/Advaitkasturi",
+  };
+
+  const learnMatrix = {
+    name: "Learn Matrix",
+    description:
+      "AI-powered learning platform prototype featuring a custom-built chatbot and curated resources to help learners master AI through projects and guided content.",
+    tags: ["React", "AI Chatbot", "Learning Platform", "Resources"],
+    repoLink:
+      "https://github.com/Advaitkasturi/LearnMatrix-vyoma-national-level-hackthon-",
+  };
+
+  const ieeeProject = updatedProjects.find((p) =>
+    (p.name || "").toLowerCase().includes("ieee")
+  );
+
+  const otherProjects = updatedProjects.filter((p) => p !== ieeeProject);
+
   const finalProjects = [
-    ...updatedProjects,
-    {
-      name: "CampusHub",
-      description:
-        "An all-in-one campus platform for Events Discovery + Registration and Lost & Found. Built to reduce scattered info and make campus life easier with clean UI, tracking, and smart reminders.",
-      tags: ["Flutter", "Firebase", "Cloud Storage", "Notifications", "QR"],
-      liveLink: "",
-      repoLink: "https://github.com/Advaitkasturi",
-    },
-    {
-      name: "Learn Matrix",
-      description:
-        "This is a prototype of an AI-powered learning website that features a dedicated chatbot developed by us. The website contains all the essential resources to learn AI, including projects based on it to help users improve their skills.",
-      tags: ["React", "AI Chatbot", "Learning Platform", "Resources"],
-      liveLink: "",
-      repoLink:
-        "https://github.com/Advaitkasturi/LearnMatrix-vyoma-national-level-hackthon-",
-    },
+    campusHub,
+    learnMatrix,
+    ...(ieeeProject ? [ieeeProject] : []),
+    ...otherProjects,
   ];
 
   const handleNext = () =>
@@ -63,237 +73,152 @@ export default function Projects() {
   const handlePrev = () =>
     setIndex((prev) => (prev - 1 + finalProjects.length) % finalProjects.length);
 
+  const ActionButtons = ({ project }) => (
+    <>
+      {project.apkLink ? (
+        <a
+          href={project.apkLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 inline-flex items-center justify-center gap-2 
+                     bg-white text-black font-semibold py-2.5 rounded-xl 
+                     hover:bg-gray-200 transition"
+        >
+          APK File <FiDownload />
+        </a>
+      ) : project.liveLink ? (
+        <a
+          href={project.liveLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 inline-flex items-center justify-center gap-2 
+                     bg-white text-black font-semibold py-2.5 rounded-xl 
+                     hover:bg-gray-200 transition"
+        >
+          Live <FiExternalLink />
+        </a>
+      ) : (
+        <div className="flex-1 inline-flex items-center justify-center gap-2 
+                        bg-white/5 border border-white/10 text-gray-400 font-semibold py-2.5 rounded-xl">
+          No Live
+        </div>
+      )}
+
+      {project.repoLink ? (
+        <a
+          href={project.repoLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 inline-flex items-center justify-center gap-2 
+                     bg-white/10 border border-white/15 text-white font-semibold py-2.5 rounded-xl 
+                     hover:bg-white/15 transition"
+        >
+          Code <FiGithub />
+        </a>
+      ) : (
+        <div className="flex-1 inline-flex items-center justify-center gap-2 
+                        bg-white/5 border border-white/10 text-gray-400 font-semibold py-2.5 rounded-xl">
+          No Repo
+        </div>
+      )}
+    </>
+  );
+
   return (
     <section
       id="projects"
       className="relative bg-black text-white py-24 px-6 sm:px-10 md:px-20 flex flex-col items-center overflow-hidden"
     >
-      {/* ✨ Soft White Glow Background */}
-      <div className="absolute inset-0 -z-10 bg-black">
-        <div className="absolute -top-28 -left-28 w-[520px] h-[520px] bg-white/10 rounded-full blur-[150px]" />
-        <div className="absolute bottom-[-160px] right-[-160px] w-[650px] h-[650px] bg-white/10 rounded-full blur-[170px]" />
-        <div className="absolute top-[35%] left-[55%] w-[420px] h-[420px] bg-white/5 rounded-full blur-[140px]" />
-      </div>
-
-      {/* 🔥 Title */}
+      {/* 🔥 PROJECTS TITLE */}
       <motion.h2
-        initial={{ opacity: 0, y: -30 }}
+        initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-4xl sm:text-6xl font-extrabold text-center mb-16 tracking-tight"
+        className="text-4xl sm:text-5xl font-extrabold mb-14 tracking-tight"
       >
-        <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
-          Featured Projects
+        <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
+          Projects
         </span>
-        <span className="block mt-4 w-28 sm:w-40 h-[3px] mx-auto bg-gradient-to-r from-transparent via-white/50 to-transparent rounded-full" />
+        <span className="block mt-3 w-20 h-[3px] mx-auto bg-white/40 rounded-full" />
       </motion.h2>
 
-      {/* ===================== MOBILE CAROUSEL ===================== */}
+      {/* ================= MOBILE ================= */}
       <div className="sm:hidden w-full max-w-sm relative">
         <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={finalProjects[index].name}
-            initial={{ opacity: 0, y: 60, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -60, scale: 0.98 }}
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -60 }}
             transition={{ duration: 0.35 }}
-            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl 
-                       shadow-[0_0_60px_rgba(0,0,0,0.65)] overflow-hidden cursor-grab select-none"
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.25}
-            onDragEnd={(e, info) => {
-              if (info.offset.x < -100) handleNext();
-              else if (info.offset.x > 100) handlePrev();
-            }}
+            className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl overflow-hidden"
           >
-            {/* Top Shine */}
-            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-
-            {/* Card Header */}
-            <div className="p-6 pb-4">
-              <p className="text-[11px] text-gray-400 tracking-wide mb-2">
-                Swipe to explore →
-              </p>
-
-              <h3 className="text-2xl font-bold leading-snug">
+            <div className="p-6">
+              <h3 className="text-2xl font-bold">
                 {finalProjects[index].name}
               </h3>
-
-              <p className="text-gray-300 text-sm mt-3 leading-relaxed">
+              <p className="text-gray-300 text-sm mt-3">
                 {finalProjects[index].description}
               </p>
             </div>
 
-            {/* Tech Stack */}
             <div className="px-6 pb-4 flex flex-wrap gap-2">
               {finalProjects[index].tags?.map((tag, i) => (
                 <span
                   key={i}
-                  className="px-3 py-1 text-xs font-semibold rounded-full 
-                             bg-white/10 border border-white/10 text-gray-200"
+                  className="px-3 py-1 text-xs rounded-full bg-white/10"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            {/* Buttons */}
             <div className="px-6 pb-6 flex gap-3">
-              {finalProjects[index].liveLink ? (
-                <a
-                  href={finalProjects[index].liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 
-                             bg-white text-black font-semibold py-2.5 rounded-xl 
-                             hover:bg-gray-200 transition"
-                >
-                  Live <FiExternalLink />
-                </a>
-              ) : (
-                <div className="flex-1 inline-flex items-center justify-center gap-2 
-                                bg-white/5 border border-white/10 text-gray-400 font-semibold py-2.5 rounded-xl">
-                  No Live
-                </div>
-              )}
-
-              {finalProjects[index].repoLink ? (
-                <a
-                  href={finalProjects[index].repoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 
-                             bg-white/10 border border-white/15 text-white font-semibold py-2.5 rounded-xl 
-                             hover:bg-white/15 transition"
-                >
-                  Code <FiGithub />
-                </a>
-              ) : (
-                <div className="flex-1 inline-flex items-center justify-center gap-2 
-                                bg-white/5 border border-white/10 text-gray-400 font-semibold py-2.5 rounded-xl">
-                  No Repo
-                </div>
-              )}
+              <ActionButtons project={finalProjects[index]} />
             </div>
-
-            {/* Bottom Accent */}
-            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent" />
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation */}
         <div className="flex justify-between px-6 mt-5">
-          <button
-            onClick={handlePrev}
-            className="p-2.5 rounded-full bg-white/10 border border-white/15 hover:bg-white/15 transition"
-            aria-label="Previous"
-          >
+          <button onClick={handlePrev}>
             <FiChevronLeft size={22} />
           </button>
-          <button
-            onClick={handleNext}
-            className="p-2.5 rounded-full bg-white/10 border border-white/15 hover:bg-white/15 transition"
-            aria-label="Next"
-          >
+          <button onClick={handleNext}>
             <FiChevronRight size={22} />
           </button>
         </div>
-
-        {/* Dots */}
-        <div className="flex justify-center gap-2 mt-4">
-          {finalProjects.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                i === index ? "w-10 bg-white" : "w-2.5 bg-white/30"
-              }`}
-              aria-label={`Go to project ${i + 1}`}
-            />
-          ))}
-        </div>
       </div>
 
-      {/* ===================== DESKTOP GRID ===================== */}
+      {/* ================= DESKTOP ================= */}
       <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-7xl">
         {finalProjects.map((project, idx) => (
           <motion.div
             key={idx}
-            whileHover={{ y: -10, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 220, damping: 18 }}
-            className="group relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl 
-                       shadow-[0_0_60px_rgba(0,0,0,0.65)] overflow-hidden flex flex-col"
+            whileHover={{ y: -10 }}
+            className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl flex flex-col"
           >
-            {/* Top Shine */}
-            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-
-            {/* Header */}
             <div className="p-7">
-              <h3 className="text-2xl font-bold leading-snug text-white">
-                {project.name}
-              </h3>
-              <p className="text-gray-300 text-sm mt-3 leading-relaxed">
+              <h3 className="text-2xl font-bold">{project.name}</h3>
+              <p className="text-gray-300 text-sm mt-3">
                 {project.description}
               </p>
             </div>
 
-            {/* Tech Stack */}
             <div className="px-7 pb-4 flex flex-wrap gap-2 mt-auto">
               {project.tags?.map((tag, i) => (
                 <span
                   key={i}
-                  className="px-3 py-1 text-xs font-semibold rounded-full 
-                             bg-white/10 border border-white/10 text-gray-200 
-                             group-hover:bg-white/15 transition"
+                  className="px-3 py-1 text-xs rounded-full bg-white/10"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            {/* Buttons */}
             <div className="px-7 pb-7 flex gap-3">
-              {project.liveLink ? (
-                <a
-                  href={project.liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 
-                             bg-white text-black font-semibold py-2.5 rounded-xl 
-                             hover:bg-gray-200 transition"
-                >
-                  Live <FiExternalLink />
-                </a>
-              ) : (
-                <div className="flex-1 inline-flex items-center justify-center gap-2 
-                                bg-white/5 border border-white/10 text-gray-400 font-semibold py-2.5 rounded-xl">
-                  No Live
-                </div>
-              )}
-
-              {project.repoLink ? (
-                <a
-                  href={project.repoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 
-                             bg-white/10 border border-white/15 text-white font-semibold py-2.5 rounded-xl 
-                             hover:bg-white/15 transition"
-                >
-                  Code <FiGithub />
-                </a>
-              ) : (
-                <div className="flex-1 inline-flex items-center justify-center gap-2 
-                                bg-white/5 border border-white/10 text-gray-400 font-semibold py-2.5 rounded-xl">
-                  No Repo
-                </div>
-              )}
+              <ActionButtons project={project} />
             </div>
-
-            {/* Bottom Glow */}
-            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[240px] h-[240px] bg-white/10 blur-[80px] opacity-0 group-hover:opacity-100 transition duration-500" />
           </motion.div>
         ))}
       </div>

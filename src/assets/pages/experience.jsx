@@ -18,7 +18,16 @@ description: [
       ieee.gnitc.org
     </a>
   </>,
+ 
   <>
+    Formed and onboarded the{" "}
+    <span className="font-medium">
+      technical team
+    </span>
+    .
+  </>,
+
+   <>
     Designed{" "}
     <span className="font-medium">
       UI/UX assets
@@ -26,13 +35,6 @@ description: [
     and implemented{" "}
     <span className="font-medium">
       responsive layouts
-    </span>
-    .
-  </>,
-  <>
-    Formed and onboarded the{" "}
-    <span className="font-medium">
-      technical team
     </span>
     .
   </>

@@ -1,380 +1,489 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiArrowRight, FiExternalLink } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const experiences = [
   {
-    title: "TECH LEAD @ IEEE STUDENT BRANCH - GNI",
-description: [
-  <>
-    Designed IEEE - GNI WEBSITE (2025) –{" "}
-    <a
-      href="https://ieeegnitc.org/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-white underline decoration-white/40 hover:decoration-white hover:text-gray-200 transition"
-    >
-      ieee.gnitc.org
-    </a>
-  </>,
- 
-  <>
-    Formed and onboarded the{" "}
-    <span className="font-medium">
-      technical team
-    </span>
-    .
-  </>,
-
-   <>
-    Designed{" "}
-    <span className="font-medium">
-      UI/UX assets
-    </span>{" "}
-    and implemented{" "}
-    <span className="font-medium">
-      responsive layouts
-    </span>
-    .
-  </>
-],
-
-    button: {
-      text: "Visit Website",
-      link: "https://ieeegnitc.org/",
-    },
-    routeButton: {
-      text: "IEEE",
-      route: "/ieee",
-    },
+    id: "01",
+    title: "Tech Lead",
+    org: "IEEE Student Branch — GNI",
+    year: "2025",
+    tags: ["Web Dev", "UI/UX", "Leadership"],
+    color: "#e8e8e8",
+    description: [
+      <>
+        Designed and Developed the official IEEE GNI website — end-to-end, from Ui to Deployment.
+        <a
+          href="https://ieeegnitc.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-white/30 hover:decoration-white transition-all"
+        >
+   
+        </a>{" "}
+        
+      </>,
+      <>Assembled and onboarded the full technical team from scratch.</>,
+      <>Built responsive layouts and crafted all UI/UX design assets.</>,
+    ],
+    cta: { text: "Visit Site", href: "https://ieeegnitc.org/", external: true },
+    route: { text: "See IEEE Work", to: "/ieee" },
   },
   {
-    title: "WEB DEV LEAD @ GOOGLE DEVELOPER GROUPS ON CAMPUS - GNI",
+    id: "02",
+    title: "Web Dev Lead",
+    org: "Google Developer Groups on Campus — GNI",
+    year: "2025",
+    tags: ["Bootcamp", "GenAI", "Mentorship"],
+    color: "#c8c8c8",
     description: [
-      "Organized and led the Web Development Bootcamp (April 2025).",
-      " Provided technical support during the GEN-AI Bootcamp (February 2025).",
-  
+      <>Organized and led the Web Development Bootcamp — April 2025.</>,
+      <>Delivered technical support during the GEN-AI Bootcamp — Feb 2025.</>,
     ],
-    routeButton: {
-      text: "GDG",
-      route: "/gdg",
-    },
+    route: { text: "See GDG Work", to: "/gdg" },
   },
 ];
 
-export default function ExperienceSection() {
-  const [index, setIndex] = useState(0);
+const tagColors = ["bg-white/10", "bg-white/8", "bg-white/6"];
 
-  const handleNext = () => setIndex((prev) => (prev + 1) % experiences.length);
-  const handlePrev = () =>
-    setIndex((prev) => (prev - 1 + experiences.length) % experiences.length);
+function useInView(ref, threshold = 0.15) {
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      { threshold }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [ref, threshold]);
+  return inView;
+}
+
+/* ─── Single Experience Card (Desktop) ─── */
+function ExpCard({ exp, index, isActive, onClick }) {
+  const ref = useRef(null);
+  const inView = useInView(ref);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.7, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative cursor-pointer"
+      onClick={onClick}
+    >
+      <div
+        className={`
+          relative rounded-2xl lg:rounded-3xl overflow-hidden
+          border transition-all duration-500
+          ${isActive
+            ? "border-white/25 bg-white/8 shadow-[0_0_80px_rgba(255,255,255,0.06)]"
+            : "border-white/8 bg-white/3 hover:border-white/15 hover:bg-white/5"
+          }
+        `}
+      >
+        {/* Top shimmer */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+
+        {/* Active glow blob */}
+        {isActive && (
+          <motion.div
+            layoutId="activeGlow"
+            className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/5 blur-3xl pointer-events-none"
+          />
+        )}
+
+        <div className="p-6 sm:p-8 lg:p-10">
+          {/* Header row */}
+          <div className="flex items-start justify-between gap-4 mb-6">
+            <div className="flex items-center gap-4">
+              {/* Big number */}
+              <span
+                className="text-5xl lg:text-7xl font-black tabular-nums select-none"
+                style={{
+                  WebkitTextStroke: "1px rgba(255,255,255,0.15)",
+                  color: "transparent",
+                }}
+              >
+                {exp.id}
+              </span>
+              <div>
+                <p className="text-[11px] tracking-[0.2em] uppercase text-gray-500 mb-0.5">
+                  {exp.year}
+                </p>
+                <h3 className="text-xl lg:text-2xl font-bold text-white leading-tight">
+                  {exp.title}
+                </h3>
+                <p className="text-sm text-gray-400 mt-0.5">{exp.org}</p>
+              </div>
+            </div>
+
+            {/* Tags */}
+            <div className="hidden sm:flex flex-wrap gap-1.5 justify-end max-w-[160px]">
+              {exp.tags.map((tag, i) => (
+                <span
+                  key={tag}
+                  className={`text-[10px] tracking-wide uppercase px-2.5 py-1 rounded-full ${tagColors[i % tagColors.length]} border border-white/10 text-gray-300`}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Description */}
+          <AnimatePresence>
+            {isActive && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="overflow-hidden"
+              >
+                <ul className="space-y-2.5 mb-8">
+                  {exp.description.map((line, i) => (
+                    <motion.li
+                      key={i}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.08 + 0.1 }}
+                      className="flex gap-3 text-gray-300 text-sm lg:text-base leading-relaxed"
+                    >
+                      <span className="mt-2 w-1 h-1 rounded-full bg-white/40 shrink-0" />
+                      {line}
+                    </motion.li>
+                  ))}
+                </ul>
+
+                {/* CTAs */}
+                <div className="flex flex-wrap gap-3">
+                  {exp.cta && (
+                    <a
+                      href={exp.cta.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 bg-white text-black text-sm font-semibold px-5 py-2.5 rounded-xl hover:bg-gray-100 transition"
+                    >
+                      {exp.cta.text} <FiExternalLink size={14} />
+                    </a>
+                  )}
+                  {exp.route && (
+                    <Link
+                      to={exp.route.to}
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 bg-white/8 text-white text-sm font-semibold px-5 py-2.5 rounded-xl border border-white/12 hover:bg-white/12 transition"
+                    >
+                      {exp.route.text} <FiArrowRight size={14} />
+                    </Link>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Collapsed summary */}
+          {!isActive && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-gray-500 text-sm line-clamp-2"
+            >
+              Click to expand
+            </motion.p>
+          )}
+
+          {/* Expand indicator */}
+          <div className="flex items-center justify-between mt-5">
+            <div className="flex gap-1.5">
+              {exp.tags.slice(0, 2).map((tag) => (
+                <span
+                  key={tag}
+                  className="sm:hidden text-[9px] tracking-wide uppercase px-2 py-0.5 rounded-full bg-white/8 border border-white/10 text-gray-400"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <motion.span
+              animate={{ rotate: isActive ? 45 : 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-gray-500 text-lg select-none"
+            >
+              +
+            </motion.span>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Mobile Swipeable Card ─── */
+function MobileCards() {
+  const [current, setCurrent] = useState(0);
+
+  const next = () => setCurrent((p) => (p + 1) % experiences.length);
+  const prev = () => setCurrent((p) => (p - 1 + experiences.length) % experiences.length);
+
+  const exp = experiences[current];
+
+  return (
+    <div className="relative">
+      <div className="relative h-auto">
+        {/* Back card */}
+        <div
+          className="absolute inset-x-3 top-3 rounded-2xl border border-white/5 bg-white/3 h-full -z-10"
+          style={{ transform: "scale(0.97) translateY(8px)" }}
+        />
+
+        {/* Main card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={exp.id}
+            initial={{ opacity: 0, y: 24, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -24, scale: 0.97 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.15}
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -60) next();
+              else if (info.offset.x > 60) prev();
+            }}
+            className="relative rounded-2xl border border-white/15 bg-white/6 backdrop-blur-xl overflow-hidden select-none touch-pan-y"
+          >
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+
+            <div className="p-5">
+              {/* ID + year row */}
+              <div className="flex items-center justify-between mb-4">
+                <span
+                  className="text-4xl font-black tabular-nums"
+                  style={{ WebkitTextStroke: "1px rgba(255,255,255,0.2)", color: "transparent" }}
+                >
+                  {exp.id}
+                </span>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-gray-500 font-mono">
+                  {exp.year}
+                </span>
+              </div>
+
+              <h3 className="text-lg font-bold text-white mb-0.5">{exp.title}</h3>
+              <p className="text-xs text-gray-400 mb-4 leading-snug">{exp.org}</p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {exp.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[9px] tracking-widest uppercase px-2 py-0.5 rounded-full bg-white/8 border border-white/10 text-gray-300"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Description */}
+              <ul className="space-y-2 mb-6">
+                {exp.description.map((line, i) => (
+                  <li key={i} className="flex gap-2.5 text-gray-300 text-xs leading-relaxed">
+                    <span className="mt-1.5 w-1 h-1 rounded-full bg-white/30 shrink-0" />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Buttons */}
+              <div className="flex flex-col gap-2">
+                {exp.cta && (
+                  <a
+                    href={exp.cta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-white text-black text-xs font-bold py-2.5 rounded-xl"
+                  >
+                    {exp.cta.text} <FiExternalLink size={12} />
+                  </a>
+                )}
+                {exp.route && (
+                  <Link
+                    to={exp.route.to}
+                    className="flex items-center justify-center gap-2 bg-white/8 text-white text-xs font-semibold py-2.5 rounded-xl border border-white/12"
+                  >
+                    {exp.route.text} <FiArrowRight size={12} />
+                  </Link>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex items-center justify-between mt-4 px-1">
+        <button
+          onClick={prev}
+          className="text-[10px] tracking-widest uppercase text-gray-500 hover:text-white transition flex items-center gap-1"
+        >
+          ← prev
+        </button>
+
+        <div className="flex gap-2">
+          {experiences.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`transition-all duration-300 rounded-full ${
+                i === current ? "w-6 h-1.5 bg-white" : "w-1.5 h-1.5 bg-white/25"
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={next}
+          className="text-[10px] tracking-widest uppercase text-gray-500 hover:text-white transition flex items-center gap-1"
+        >
+          next →
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main Export ─── */
+export default function ExperienceSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef(null);
 
   return (
     <section
       id="experience"
-      className="relative bg-black text-white py-16 px-4 sm:px-8 md:px-20 flex flex-col items-center overflow-hidden"
+      ref={sectionRef}
+      className="relative bg-black text-white py-20 sm:py-28 px-5 sm:px-8 md:px-16 lg:px-24 overflow-hidden"
     >
-      {/* ✨ Soft White Glow */}
-      <div className="absolute inset-0 -z-10 bg-black">
-        <div className="absolute -top-24 -left-24 w-[420px] h-[420px] bg-white/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-140px] right-[-140px] w-[520px] h-[520px] bg-white/10 rounded-full blur-[140px]" />
-        <div className="absolute top-[35%] left-[55%] w-[360px] h-[360px] bg-white/5 rounded-full blur-[110px]" />
+      {/* ── Background atmosphere ── */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+            backgroundSize: "200px 200px",
+          }}
+        />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-white/4 blur-[140px]" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-white/3 blur-[120px]" />
+        <div className="absolute top-1/3 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+        <div className="absolute top-2/3 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       </div>
 
-      {/* Title */}
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="text-4xl sm:text-5xl font-extrabold mb-14 tracking-tight"
-      >
-        <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
-          Experience
-        </span>
-        <span className="block mt-3 w-20 h-[3px] mx-auto bg-white/40 rounded-full" />
-      </motion.h2>
-
-      <div className="w-full flex flex-col items-center">
-        {/* ===================== MOBILE VIEW ===================== */}
-        <div className="sm:hidden w-full max-w-sm relative">
-          <AnimatePresence initial={false} mode="wait">
-            <motion.div
-              key={experiences[index].title}
-              initial={{ opacity: 0, y: 40, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 40, scale: 0.98 }}
-              transition={{ duration: 0.35 }}
-              className="relative rounded-2xl p-5 border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_45px_rgba(0,0,0,0.55)] select-none"
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.2}
-              onDragEnd={(event, info) => {
-                if (info.offset.x < -80) handleNext();
-                else if (info.offset.x > 80) handlePrev();
-              }}
-            >
-              {/* Top Highlight Line */}
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-
-              <p className="text-[11px] text-gray-400 mb-2 tracking-wide">
-                Swipe to explore →
-              </p>
-
-              <h3 className="text-base font-semibold mb-3 text-white">
-                {experiences[index].title}
-              </h3>
-
-              <div className="text-gray-300 text-xs leading-relaxed space-y-2">
-                {experiences[index].description.map((line, i) => (
-                  <p key={i} className="text-gray-300">
-                    {line}
-                  </p>
-                ))}
-              </div>
-
-              {/* Buttons */}
-              <div className="flex flex-col gap-2 mt-5">
-                {experiences[index].button && (
-                  <a
-                    href={experiences[index].button.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-white text-black font-semibold text-sm py-2.5 rounded-xl hover:bg-gray-200 transition"
-                  >
-                    {experiences[index].button.text} <FiArrowRight />
-                  </a>
-                )}
-
-                {experiences[index].routeButton && (
-                  <Link
-                    to={experiences[index].routeButton.route}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-white/10 text-white font-semibold text-sm py-2.5 rounded-xl border border-white/15 hover:bg-white/15 transition"
-                  >
-                    {experiences[index].routeButton.text} <FiArrowRight />
-                  </Link>
-                )}
-              </div>
-
-              {/* Small Footer */}
-              <div className="mt-4 text-center text-[11px] text-gray-500 italic">
-                Tap card to move next • Drag left/right
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation Buttons */}
-          <div className="flex justify-between max-w-sm mx-auto mt-5 px-2">
-            <button
-              onClick={handlePrev}
-              className="p-2.5 rounded-full bg-white/10 border border-white/15 hover:bg-white/15 transition"
-              aria-label="Previous"
-            >
-              <FiChevronLeft className="text-white" size={20} />
-            </button>
-
-            <button
-              onClick={handleNext}
-              className="p-2.5 rounded-full bg-white/10 border border-white/15 hover:bg-white/15 transition"
-              aria-label="Next"
-            >
-              <FiChevronRight className="text-white" size={20} />
-            </button>
-          </div>
-
-          {/* Pagination Dots */}
-          <div className="flex justify-center gap-2 mt-4">
-            {experiences.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                className={`w-2.5 h-2.5 rounded-full transition ${
-                  i === index ? "bg-white" : "bg-white/30"
-                }`}
-                aria-label={`Go to experience ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* ===================== DESKTOP VIEW ===================== */}
-        <div className="hidden sm:flex relative w-full max-w-md md:max-w-2xl lg:max-w-5xl h-[520px] items-center justify-center">
-          {/* Side Arrows */}
-          <button
-            onClick={handlePrev}
-            className="absolute left-0 md:-left-10 z-40 p-3 rounded-full bg-white/10 border border-white/15 hover:bg-white/15 transition"
-            aria-label="Previous"
-          >
-            <FiChevronLeft size={22} />
-          </button>
-
-          <button
-            onClick={handleNext}
-            className="absolute right-0 md:-right-10 z-40 p-3 rounded-full bg-white/10 border border-white/15 hover:bg-white/15 transition"
-            aria-label="Next"
-          >
-            <FiChevronRight size={22} />
-          </button>
-
-          <AnimatePresence>
-            {experiences.map((exp, i) => {
-              const isActive = i === index;
-
-              const offset =
-                (i - index + experiences.length) % experiences.length;
-
-              const x = offset * 22;
-              const y = Math.abs(offset) * -18;
-              const rotate = offset * 3.5;
-              const zIndex = isActive ? 50 : 40 - Math.abs(offset);
-
-              return (
-                <motion.div
-                  key={exp.title}
-                  initial={{ opacity: 0, scale: 0.92, y: 70 }}
-                  animate={{
-                    opacity: isActive ? 1 : 0.55,
-                    scale: isActive ? 1 : 0.92,
-                    x,
-                    y,
-                    rotate,
-                    zIndex,
-                    filter: isActive ? "blur(0px)" : "blur(0.4px)",
-                  }}
-                  exit={{ opacity: 0, scale: 0.92, y: 70 }}
-                  transition={{ duration: 0.55, ease: "easeOut" }}
-                  className="absolute w-[92%] md:w-[95%] h-[86%] rounded-3xl p-7 md:p-10 cursor-pointer
-                             border border-white/10 bg-white/5 backdrop-blur-2xl
-                             shadow-[0_0_60px_rgba(0,0,0,0.55)]"
-                  onClick={handleNext}
-                >
-                  {/* Top Shine */}
-                  <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-
-                  <div className="flex items-start justify-between gap-4 mb-6">
-                    <h3 className="text-xl md:text-2xl font-bold text-white leading-snug">
-                      {exp.title}
-                    </h3>
-
-                    {isActive && (
-                      <span className="text-xs md:text-sm px-3 py-1 rounded-full bg-white/10 border border-white/15 text-gray-200">
-                        Active
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="text-gray-200 text-sm md:text-base leading-relaxed space-y-3 mb-8">
-                    {exp.description.map((line, idx) => (
-                      <p key={idx} className="text-gray-300">
-                        {line}
-                      </p>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap gap-3 items-center">
-                    {exp.button && (
-                      <a
-                        href={exp.button.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 bg-white text-black font-semibold
-                                   px-5 py-2.5 rounded-xl hover:bg-gray-200 transition"
-                      >
-                        {exp.button.text} <FiArrowRight />
-                      </a>
-                    )}
-
-                    {exp.routeButton && (
-                      <Link
-                        to={exp.routeButton.route}
-                        className="inline-flex items-center justify-center gap-2 bg-white/10 text-white font-semibold
-                                   px-5 py-2.5 rounded-xl border border-white/15 hover:bg-white/15 transition"
-                      >
-                        {exp.routeButton.text} <FiArrowRight />
-                      </Link>
-                    )}
-
-                    <span className="ml-auto text-sm text-gray-500 hidden md:block">
-                      Click card to go next →
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-                    {experiences.map((_, dotIndex) => (
-                      <span
-                        key={dotIndex}
-                        className={`h-2.5 rounded-full transition-all duration-300 ${
-                          dotIndex === index
-                            ? "w-10 bg-white"
-                            : "w-2.5 bg-white/30"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </div>
-
-        {/* ===================== EXTRA UI BLOCK (Different Type) ===================== */}
+      {/* ── Section Header ── */}
+      <div className="mb-14 sm:mb-20">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 mb-4"
+        >
+          <div className="w-8 h-px bg-white/30" />
+          <span className="text-[10px] tracking-[0.35em] uppercase text-gray-500 font-mono">
+            Career Journey
+          </span>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-14 w-full max-w-5xl"
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none"
         >
-          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-6 sm:p-10 shadow-[0_0_70px_rgba(0,0,0,0.6)] relative overflow-hidden">
-            {/* Glow Line */}
-            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+          <span className="text-white">Experi</span>
+          <span
+            className="italic"
+            style={{
+              WebkitTextStroke: "1.5px rgba(255,255,255,0.35)",
+              color: "transparent",
+            }}
+          >
+            ence
+          </span>
+        </motion.h2>
+      </div>
 
-            {/* Different UI Layout */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                  
-                </h3>
-                <p className="text-gray-400 mt-2 text-sm sm:text-base max-w-2xl">
-                 I actively explore new tech,
-                  contribute to projects, and build products that improve real
-                  student experiences.
-                </p>
-              </div>
+      {/* ── MOBILE ── */}
+      <div className="sm:hidden">
+        <MobileCards />
+      </div>
 
-              <div className="flex flex-wrap gap-3">
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-sm text-gray-200 hover:bg-white/15 transition">
-                  Hackathons
-                </span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-sm text-gray-200 hover:bg-white/15 transition">
-                  UI/UX Design
-                </span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-sm text-gray-200 hover:bg-white/15 transition">
-                  AI Bots
-                </span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-sm text-gray-200 hover:bg-white/15 transition">
-                  Full Stack Apps
-                </span>
-              </div>
-            </div>
+      {/* ── DESKTOP ── */}
+      <div className="hidden sm:grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 lg:gap-12 items-start">
+        {/* Left: accordion-style cards */}
+        <div className="space-y-4">
+          {experiences.map((exp, i) => (
+            <ExpCard
+              key={exp.id}
+              exp={exp}
+              index={i}
+              isActive={activeIndex === i}
+              onClick={() => setActiveIndex(activeIndex === i ? -1 : i)}
+            />
+          ))}
+        </div>
 
-            {/* Bottom CTA */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
-              <p className="text-gray-500 text-sm italic">
-                “Keep building. Keep learning.”
-              </p>
-
-              <a
-                href="#projects"
-                className="inline-flex items-center justify-center gap-2 bg-white text-black font-semibold px-6 py-3 rounded-xl hover:bg-gray-200 transition"
-              >
-                Explore My Projects <FiArrowRight />
-              </a>
+        {/* Right: sidebar */}
+        <div className="hidden lg:block sticky top-8 space-y-5">
+          {/* Skills tag cloud */}
+          <div className="rounded-2xl border border-white/10 bg-white/4 p-5">
+            <p className="text-[10px] tracking-[0.25em] uppercase text-gray-500 mb-3">
+              Skills & Focus
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {["React", "Tailwind", "Figma", "Leadership", "UI/UX", "Bootcamps", "Full Stack"].map((s) => (
+                <span
+                  key={s}
+                  className="text-[10px] tracking-wide uppercase px-2.5 py-1 rounded-full border border-white/10 bg-white/5 text-gray-300 hover:bg-white/10 transition cursor-default"
+                >
+                  {s}
+                </span>
+              ))}
             </div>
           </div>
-        </motion.div>
+
+          {/* CTA */}
+          <div className="rounded-2xl border border-white/10 bg-white/4 p-5 relative overflow-hidden">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+            <a
+              href="#projects"
+              className="flex items-center justify-center gap-2 bg-white text-black text-xs font-bold py-2.5 rounded-xl hover:bg-gray-200 transition w-full"
+            >
+              Explore My Projects <FiArrowRight size={12} />
+            </a>
+          </div>
+        </div>
       </div>
+
+      {/* ── Bottom CTA strip (sm only) ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="lg:hidden mt-10 flex justify-end rounded-2xl border border-white/10 bg-white/4 p-5 sm:p-6"
+      >
+        <a
+          href="#projects"
+          className="inline-flex items-center gap-2 bg-white text-black text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-gray-200 transition"
+        >
+          Explore Projects <FiArrowRight size={14} />
+        </a>
+      </motion.div>
     </section>
   );
 }

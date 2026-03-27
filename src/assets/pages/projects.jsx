@@ -46,12 +46,13 @@ export default function Projects() {
   };
 
   const learnMatrix = {
-    name: "Learn Matrix",
+    name: "GradBridge",
     description:
-      "AI-powered learning platform prototype featuring a custom-built chatbot and curated resources to help learners master AI through projects and guided content.",
-    tags: ["React", "AI Chatbot", "Learning Platform", "Resources"],
-    repoLink:
-      "https://github.com/Advaitkasturi/LearnMatrix-vyoma-national-level-hackthon-",
+      "GradBridge is a college alumni and career networking platform that connects students with alumni for mentorship, internships, and job opportunities. It provides a centralized space for career guidance, updates, and networking, helping bridge the gap between education and professional careers.",
+    tags: ["Flutter", "Firestone", "Firebase", "Cloudinary"],
+   apkLink:
+      "https://drive.google.com/drive/folders/1ASxxBkZgrgld5Sc7RAeFTItycNBl_jxH?usp=sharing",
+    repoLink: "https://github.com/Advaitkasturi",
   };
 
   const ieeeProject = updatedProjects.find((p) =>
